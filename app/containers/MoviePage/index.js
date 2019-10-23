@@ -29,7 +29,6 @@ export function MoviePage(props) {
   useEffect(() => {
     props.sendGetMovieRequest();
   }, []);
-  // console.log('In MoviePage Container: ', movies);
   return (
     <div>
       <Helmet>

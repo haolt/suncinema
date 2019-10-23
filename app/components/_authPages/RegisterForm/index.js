@@ -97,7 +97,7 @@ export default function RegisterForm() {
         fullWidth
         onClick={submitRegisterForm}
       >
-        Login
+        Register
       </Button>
     </div>
   );

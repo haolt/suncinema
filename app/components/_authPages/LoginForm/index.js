@@ -1,5 +1,9 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Input from '@material-ui/core/Input';
@@ -15,7 +19,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import useStyles from './useStyles';
 
-export default function LoginForm() {
+export default function LoginForm(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     password: '',
@@ -26,17 +30,24 @@ export default function LoginForm() {
   const handleChange = field => event => {
     setValues({ ...values, [field]: event.target.value });
   };
-
+  const resetFields = () => {
+    setValues({
+      password: '',
+      email: '',
+      showPassword: false,
+    });
+  }
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
 
   const submitLoginForm = () => {
-    console.log(values);
+    const user = { email: values.email, password: values.password };
+    props.sendLoginRequest(user);
   };
-
+  const { emailError, passwordError, error } = props;
   return (
-    <div className={classes.root}>
+    <form className={classes.root}>
       <Typography variant="h3" component="h3">
         Login
       </Typography>
@@ -48,6 +59,7 @@ export default function LoginForm() {
           onChange={handleChange('email')}
         />
       </FormControl>
+      {emailError}
       <FormControl fullWidth className={classes.margin}>
         <InputLabel htmlFor="adornment-password">Password</InputLabel>
         <Input
@@ -68,6 +80,7 @@ export default function LoginForm() {
           }
         />
       </FormControl>
+      {passwordError}
       <Button
         variant="outlined"
         size="medium"
@@ -77,6 +90,18 @@ export default function LoginForm() {
       >
         Login
       </Button>
-    </div>
+      {error === 'Unauthorized' && (
+        <p>
+          Account is invalid.
+          <span onClick={resetFields}>Re-Login</span>
+        </p>
+      )}
+    </form>
   );
 }
+LoginForm.propTypes = {
+  error: PropTypes.string,
+  passwordError: PropTypes.array,
+  emailError: PropTypes.array,
+  sendLoginRequest: PropTypes.func.isRequired,
+};

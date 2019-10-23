@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 export const setCookie = (name, value, days) => {
   let expires = '';
   if (days) {
@@ -7,7 +8,6 @@ export const setCookie = (name, value, days) => {
   }
   document.cookie = `${name}=${(value || '') + expires}; path=/`;
 };
-
 export const getCookie = name => {
   const nameEQ = `${name}=`;
   const ca = document.cookie.split(';');

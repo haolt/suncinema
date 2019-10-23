@@ -1,19 +1,7 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-/**
- * Direct selector to the loginPage state domain
- */
-
 const selectLoginPageDomain = state => state.loginPage || initialState;
-
-/**
- * Other specific selectors
- */
-
-/**
- * Default selector used by LoginPage
- */
 
 const makeSelectLoginPage = () =>
   createSelector(
@@ -21,5 +9,48 @@ const makeSelectLoginPage = () =>
     substate => substate,
   );
 
+const makeSelectEmail = () =>
+  createSelector(
+    selectLoginPageDomain,
+    substate => substate.email,
+  );
+
+const makeSelectPassword = () =>
+  createSelector(
+    selectLoginPageDomain,
+    substate => substate.password,
+  );
+const makeSelectLoginStatus = () =>
+  createSelector(
+    selectLoginPageDomain,
+    substate => substate.isLoginSuccess,
+  );
+
+const makeSelectEmailError = () =>
+  createSelector(
+    selectLoginPageDomain,
+    substate => substate.emailError,
+  );
+
+const makeSelectPasswordError = () =>
+  createSelector(
+    selectLoginPageDomain,
+    substate => substate.passwordError,
+  );
+
+const makeSelectError = () =>
+  createSelector(
+    selectLoginPageDomain,
+    substate => substate.error,
+  );
+
 export default makeSelectLoginPage;
-export { selectLoginPageDomain };
+export {
+  selectLoginPageDomain,
+  makeSelectEmail,
+  makeSelectPassword,
+  makeSelectLoginStatus,
+  makeSelectEmailError,
+  makeSelectPasswordError,
+  makeSelectError,
+};

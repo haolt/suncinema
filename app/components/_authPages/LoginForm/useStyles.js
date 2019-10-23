@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(theme => ({
   root: {
     padding: '2.5em',
-    background: '#29344A',
+    background: '#344358',
     maxWidth: '360px',
-    height: '50vh',
+    // height: '50vh',
     margin: 'auto',
   },
   margin: {

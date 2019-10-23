@@ -1,11 +1,5 @@
-/**
- *
- * LoginPage
- *
- */
-
 import React, { memo } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
@@ -17,14 +11,22 @@ import { useInjectReducer } from 'utils/injectReducer';
 import FlexWrapper from 'components/_layouts/FlexWrapper';
 import LoginForm from 'components/_authPages/LoginForm';
 
-import makeSelectLoginPage from './selectors';
+import { sendLoginRequest } from './actions';
+import {
+  makeSelectLoginStatus,
+  makeSelectEmailError,
+  makeSelectPasswordError,
+  makeSelectError,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function LoginPage() {
+export function LoginPage(props) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
-
+  if (props.isLoginSuccess) {
+    props.history.push('/');
+  }
   return (
     <div>
       <Helmet>
@@ -32,23 +34,36 @@ export function LoginPage() {
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <FlexWrapper>
-        <LoginForm />
+        <LoginForm
+          sendLoginRequest={props.sendLoginRequest}
+          emailError={props.emailError}
+          passwordError={props.passwordError}
+          error={props.error}
+        />
       </FlexWrapper>
     </div>
   );
 }
 
 LoginPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  passwordError: PropTypes.array,
+  emailError: PropTypes.array,
+  isLoginSuccess: PropTypes.bool.isRequired,
+  sendLoginRequest: PropTypes.func.isRequired,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  loginPage: makeSelectLoginPage(),
+  isLoginSuccess: makeSelectLoginStatus(),
+  emailError: makeSelectEmailError(),
+  passwordError: makeSelectPasswordError(),
+  error: makeSelectError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    sendLoginRequest: user => dispatch(sendLoginRequest(user)),
   };
 }
 

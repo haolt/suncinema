@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { API_URL } from 'commons/API_URL';
+import { API_URL, ACCESS_TOKEN } from 'commons/constants';
+import { getCookie } from '../cookie';
 
 axios.defaults.baseURL = API_URL;
 
@@ -8,7 +9,9 @@ export default function requestHelper({ method, options }) {
     ...options,
     method,
     headers: {
-      // Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      Authorization: `Bearer ${getCookie(ACCESS_TOKEN)}`,
     },
-  }).then(response => response);
+  })
+  .then(response => response)
+  .catch(err => err.response);
 }

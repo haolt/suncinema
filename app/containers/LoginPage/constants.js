@@ -1,7 +1,3 @@
-/*
- *
- * LoginPage constants
- *
- */
-
-export const DEFAULT_ACTION = 'app/LoginPage/DEFAULT_ACTION';
+export const POST_LOGIN_REQUEST = 'POST_LOGIN_REQUEST';
+export const POST_LOGIN_REQUEST_SUCCESS = 'POST_LOGIN_REQUEST_SUCCESS';
+export const POST_LOGIN_REQUEST_FAIL = 'POST_LOGIN_REQUEST_FAIL';
