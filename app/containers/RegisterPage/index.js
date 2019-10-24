@@ -1,11 +1,6 @@
-/**
- *
- * RegisterPage
- *
- */
-
+/* eslint-disable no-console */
 import React, { memo } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
@@ -17,14 +12,26 @@ import { useInjectReducer } from 'utils/injectReducer';
 import FlexWrapper from 'components/_layouts/FlexWrapper';
 import RegisterForm from 'components/_authPages/RegisterForm';
 
-import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { sendRegisterRequest } from './actions';
+import {
+  makeSelectRegisterStatus,
+  makeSelectNameError,
+  makeSelectEmailError,
+  makeSelectPasswordError,
+} from './selectors';
 
-export function RegisterPage() {
+export function RegisterPage(props) {
   useInjectReducer({ key: 'registerPage', reducer });
   useInjectSaga({ key: 'registerPage', saga });
-
+  if (props.isRegisterSuccess) {
+    if (window.confirm('Congrat ! You register successfully. Do you wanna login right now?')) {
+      props.history.push('/login');
+    } else {
+      props.history.push('/');
+    }
+  }
   return (
     <div>
       <Helmet>
@@ -32,23 +39,36 @@ export function RegisterPage() {
         <meta name="description" content="Description of RegisterPage" />
       </Helmet>
       <FlexWrapper>
-        <RegisterForm />
+        <RegisterForm
+          sendRegisterRequest={props.sendRegisterRequest}
+          emailError={props.emailError}
+          passwordError={props.passwordError}
+          nameError={props.nameError}
+        />
       </FlexWrapper>
     </div>
   );
 }
 
 RegisterPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  sendRegisterRequest: PropTypes.func.isRequired,
+  history: PropTypes.object,
+  passwordError: PropTypes.array,
+  emailError: PropTypes.array,
+  nameError: PropTypes.array,
+  isRegisterSuccess: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  registerPage: makeSelectRegisterPage(),
+  isRegisterSuccess: makeSelectRegisterStatus(),
+  nameError: makeSelectNameError(),
+  emailError: makeSelectEmailError(),
+  passwordError: makeSelectPasswordError(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    sendRegisterRequest: user => dispatch(sendRegisterRequest(user)),
   };
 }
 

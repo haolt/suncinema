@@ -1,13 +1,20 @@
-/*
- *
- * RegisterPage actions
- *
- */
+import {
+  POST_REGISTER_REQUEST,
+  POST_REGISTER_REQUEST_SUCCESS,
+  POST_REGISTER_REQUEST_FAIL,
+} from './constants';
 
-import { DEFAULT_ACTION } from './constants';
+export const sendRegisterRequest = user => ({
+  type: POST_REGISTER_REQUEST,
+  payloads: user,
+});
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const sendRegisterRequestSuccess = response => ({
+  type: POST_REGISTER_REQUEST_SUCCESS,
+  response,
+});
+
+export const sendRegisterRequestFail = response => ({
+  type: POST_REGISTER_REQUEST_FAIL,
+  response,
+});

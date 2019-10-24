@@ -1,20 +1,43 @@
-/*
- *
- * RegisterPage reducer
- *
- */
-import produce from 'immer';
-import { DEFAULT_ACTION } from './constants';
+/* eslint-disable no-console */
+import {
+  POST_REGISTER_REQUEST,
+  POST_REGISTER_REQUEST_SUCCESS,
+  POST_REGISTER_REQUEST_FAIL,
+} from './constants';
 
-export const initialState = {};
+export const initialState = {
+  email: '',
+  password: '',
+  password_confirmation: '',
+  name: '',
+  nameError: [''],
+  emailError: [''],
+  passwordError: [''],
+  isRegisterSuccess: false,
+};
 
-/* eslint-disable default-case, no-param-reassign */
-const registerPageReducer = (state = initialState, action) =>
-  produce(state, (/* draft */) => {
-    switch (action.type) {
-      case DEFAULT_ACTION:
-        break;
-    }
-  });
+const registerPageReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case POST_REGISTER_REQUEST:
+      return {
+        ...state,
+        email: action.payloads.email,
+        password: action.payloads.password,
+        password_confirmation: action.payloads.password_confirmation,
+        name: action.payloads.name,
+      };
+    case POST_REGISTER_REQUEST_SUCCESS:
+      return { ...state, isRegisterSuccess: true };
+    case POST_REGISTER_REQUEST_FAIL:
+      return {
+        ...state,
+        nameError: action.response.data.name,
+        emailError: action.response.data.email,
+        passwordError: action.response.data.password,
+      };
+    default:
+      return state;
+  }
+};
 
 export default registerPageReducer;

@@ -23,7 +23,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import useStyles from './useStyles';
 
-const defaultAvatar = 'https://3.bp.blogspot.com/-AEkny-9Y0Uw/W8YBZnD7oJI/AAAAAAAybmk/35h9UBHIQxk8OE_b8uqtw8gmYJ5XbOKpgCLcBGAs/s1600/AW2040870_20.gif';
+const defaultAvatar =
+  'https://3.bp.blogspot.com/-AEkny-9Y0Uw/W8YBZnD7oJI/AAAAAAAybmk/35h9UBHIQxk8OE_b8uqtw8gmYJ5XbOKpgCLcBGAs/s1600/AW2040870_20.gif';
 
 function PersonalInformation(props) {
   const classes = useStyles();
@@ -36,7 +37,7 @@ function PersonalInformation(props) {
     name,
     updated_at,
   } = props.user;
-  console.log('Personal Information: ', props.user);
+  // console.log('Personal Information: ', props.user);
   return (
     <Grid container spacing={3}>
       <Grid item md={8} xs={12}>

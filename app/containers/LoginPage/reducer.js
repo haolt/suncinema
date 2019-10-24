@@ -27,13 +27,13 @@ const loginPageReducer = (state = initialState, action) => {
         password: action.payloads.password,
       };
     case POST_LOGIN_REQUEST_SUCCESS:
-      console.log(action);
+      // console.log(action);
       token = action.response.data;
       setCookie(ACCESS_TOKEN, token.access_token, 365);
-      console.log({ ...state, isLoginSuccess: true });
+      // console.log({ ...state, isLoginSuccess: true });
       return { ...state, isLoginSuccess: true };
     case POST_LOGIN_REQUEST_FAIL:
-      console.log(action);
+      // console.log(action);
       return {
         ...state,
         isLoginSuccess: false,

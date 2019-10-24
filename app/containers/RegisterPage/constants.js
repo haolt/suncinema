@@ -1,7 +1,3 @@
-/*
- *
- * RegisterPage constants
- *
- */
-
-export const DEFAULT_ACTION = 'app/RegisterPage/DEFAULT_ACTION';
+export const POST_REGISTER_REQUEST = 'POST_REGISTER_REQUEST';
+export const POST_REGISTER_REQUEST_SUCCESS = 'POST_REGISTER_REQUEST_SUCCESS';
+export const POST_REGISTER_REQUEST_FAIL = 'POST_REGISTER_REQUEST_FAIL';
