@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-console */
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
@@ -26,7 +27,11 @@ export function RegisterPage(props) {
   useInjectReducer({ key: 'registerPage', reducer });
   useInjectSaga({ key: 'registerPage', saga });
   if (props.isRegisterSuccess) {
-    if (window.confirm('Congrat ! You register successfully. Do you wanna login right now?')) {
+    if (
+      window.confirm(
+        'Congrat ! You register successfully. Do you wanna login right now?',
+      )
+    ) {
       props.history.push('/login');
     } else {
       props.history.push('/');
