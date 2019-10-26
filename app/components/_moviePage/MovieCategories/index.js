@@ -5,7 +5,6 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import MovieList from 'components/_moviePage/MovieList';
 import useStyles from './useStyles';
 import categories from './categories';
 
@@ -19,7 +18,6 @@ function MovieCategories(props) {
       sort: newValue + 1,
     });
   };
-  const { movies } = props;
   return (
     <Paper className={classes.root}>
       <Tabs
@@ -38,16 +36,11 @@ function MovieCategories(props) {
           />
         ))}
       </Tabs>
-      {/* {movies.map(movie => (
-        <span key={movie.id}>{movie.title}</span>
-      ))} */}
-      <MovieList movies={movies} />
     </Paper>
   );
 }
 
 MovieCategories.propTypes = {
-  movies: PropTypes.array.isRequired,
   sendSortMovieRequest: PropTypes.func.isRequired,
 };
 

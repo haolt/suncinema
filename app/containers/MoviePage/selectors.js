@@ -27,6 +27,11 @@ const makeSelectPage = () =>
     selectMoviePageDomain,
     substate => substate.page,
   );
+const makeSelectPageTotal = () =>
+  createSelector(
+    selectMoviePageDomain,
+    substate => substate.pageTotal,
+  );
 const makeSelectMovies = () =>
   createSelector(
     selectMoviePageDomain,
@@ -39,5 +44,6 @@ export {
   makeSelectOrder,
   makeSelectSort,
   makeSelectPage,
+  makeSelectPageTotal,
   makeSelectMovies,
 };

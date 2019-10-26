@@ -12,6 +12,7 @@ function* workerSortMovieSaga() {
   const sort = yield select(makeSelectSort());
   const order = yield select(makeSelectOrder());
   const page = yield select(makeSelectPage());
+  // console.log('saga')
   const response = yield call(sendSortMovieRequest, { sort, order, page });
 
   if (handleResponse(response)) {

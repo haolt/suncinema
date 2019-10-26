@@ -39,14 +39,6 @@ const Navigate = () => (
           <ListItemText primary="Movies" />
         </ListItem>
       </NavLink>
-      <NavLink to="/booking" activeClassName="selected" key="booking">
-        <ListItem button>
-          <ListItemIcon>
-            <InsertInvitationIcon />
-          </ListItemIcon>
-          <ListItemText primary="Booking" />
-        </ListItem>
-      </NavLink>
     </List>
     <Divider />
     <List>

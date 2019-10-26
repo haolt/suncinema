@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   SORT_MOVIE_REQUEST,
   SORT_MOVIE_REQUEST_SUCCESS,
@@ -7,7 +8,8 @@ import {
 export const initialState = {
   order: 2, // desc
   sort: 1, // sort_by_popular
-  page: 1,
+  page: 1, // currentPage
+  pageTotal: 1, // quantity of pages
   movies: [],
 };
 
@@ -16,16 +18,21 @@ const moviePageReducer = (state = initialState, action) => {
     case SORT_MOVIE_REQUEST:
       return {
         ...state,
-        sort: action.payloads.sort,
+        sort: action.payloads.sort ? action.payloads.sort : state.sort,
+        page: action.payloads.page ? action.payloads.page : state.page,
       };
     case SORT_MOVIE_REQUEST_SUCCESS:
-      // console.log({
-      //   ...state,
-      //   movies: action.response.data.data,
-      // });
+      console.log({
+        ...state,
+        movies: action.response.data.data,
+        page: action.response.data.page,
+        pageTotal: Math.ceil(action.response.data.total / 10),
+      });
       return {
         ...state,
         movies: action.response.data.data,
+        page: action.response.data.page,
+        pageTotal: Math.ceil(action.response.data.total / 10),
       };
     case SORT_MOVIE_REQUEST_FAIL:
       // console.log(action);

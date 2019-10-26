@@ -1,36 +1,81 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable func-names */
+/* eslint-disable react/prop-types */
 /* eslint-disable no-var */
 /* eslint-disable no-console */
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Paper from '@material-ui/core/Paper';
-import useStyles from './useStyles';
+import { withStyles } from '@material-ui/core/styles';
+import styles from './styles';
 
-const goPrev = () => {};
-const goNext = () => {};
+class Pagination extends Component {
+  state = {
+    page: this.props.curentPage || 1,
+  };
 
-function Pagination(props) {
-  const classes = useStyles();
-  const { total } = props;
-  const pageTotal = Math.ceil(total / 10);
+  goFirstOrLast = number => {
+    // 0: first, 1: last
+    this.setState({ page: number ? this.props.pageTotal : 1 }, function() {
+      this.props.sendSortMovieRequest({ page: this.state.page })
+    });
+  };
 
-  return (
-    <Paper className={classes.root}>
-      <ButtonGroup size="small">
-        <Button onClick={goPrev}>Prev</Button>
-        <Button>1</Button>
-        <Button>...</Button>
-        <Button>{pageTotal}</Button>
-        <Button onClick={goNext}>Next</Button>
-      </ButtonGroup>
-    </Paper>
-  );
+  goPrev = () => {
+    this.setState(previousState => {
+      return {
+        ...previousState,
+        page: previousState.page > 1 ? previousState.page - 1 : 1,
+      };
+    }, function() {
+      this.props.sendSortMovieRequest({ page: this.state.page })
+    });
+  };
+
+  goNext = () => {
+    this.setState(previousState => ({
+      ...previousState,
+      page:
+        previousState.page < this.props.pageTotal
+          ? previousState.page + 1
+          : this.props.pageTotal,
+    }), function() {
+      this.props.sendSortMovieRequest({ page: this.state.page })
+    });
+  };
+
+  handleChange(event) {
+    const sltPage = parseInt(event.target.value, 10);
+    if (sltPage > 0 && sltPage <= this.props.pageTotal) {
+      this.setState({ page: sltPage }, function() {
+        this.props.sendSortMovieRequest({ page: this.state.page })
+      });
+    }
+  }
+
+  render() {
+    const { pageTotal, classes } = this.props;
+    const { page } = this.state;
+    return (
+      <>
+        <Button onClick={() => this.goFirstOrLast(0)}>❮❮</Button>
+        <Button onClick={this.goPrev}>❮</Button>
+        <input
+          className={classes.sltPage}
+          type="number"
+          value={page}
+          onChange={event => this.handleChange(event)}
+        />
+        of {pageTotal}
+        <Button onClick={this.goNext}>❯</Button>
+        <Button onClick={() => this.goFirstOrLast(1)}>❯❯</Button>
+      </>
+    );
+  }
 }
+export default withStyles(styles)(Pagination);
 
 Pagination.propTypes = {
-  // curentPage: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired,
+  pageTotal: PropTypes.number.isRequired,
+  sendSortMovieRequest: PropTypes.func.isRequired,
 };
-
-export default Pagination;

@@ -26,6 +26,8 @@ import reducer from './reducer';
 import saga from './saga';
 import { sendSearchMovieRequest } from './actions';
 
+const type = 'discoverPage';
+
 export function DiscoverPage(props) {
   useInjectReducer({ key: 'discoverPage', reducer });
   useInjectSaga({ key: 'discoverPage', saga });
@@ -45,7 +47,7 @@ export function DiscoverPage(props) {
           </FlexWrapper>
           <MovieList
             movies={props.movies}
-            type="discoverPage"
+            type={type}
           />
         </>
       ) : (
