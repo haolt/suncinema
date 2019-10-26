@@ -1,25 +1,28 @@
-/**
- *
- * DiscoverPage
- *
- */
-
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import DiscoverMovie from 'components/_discoverPage/DiscoverMovie';
+
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectDiscoverPage from './selectors';
+import { makeSelectMovies } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { sendSortMovieRequest } from './actions';
 
-export function DiscoverPage() {
+export function DiscoverPage(props) {
   useInjectReducer({ key: 'discoverPage', reducer });
   useInjectSaga({ key: 'discoverPage', saga });
+
+  useEffect(() => {
+    props.sendSortMovieRequest({
+      sort: 2,
+    });
+  }, []);
 
   return (
     <div>
@@ -27,22 +30,26 @@ export function DiscoverPage() {
         <title>DiscoverPage</title>
         <meta name="description" content="Description of DiscoverPage" />
       </Helmet>
-      DiscoverPage
+      <DiscoverMovie
+        movies={props.movies}
+        sendSortMovieRequest={props.sendSortMovieRequest}
+      />
     </div>
   );
 }
 
 DiscoverPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  sendSortMovieRequest: PropTypes.func.isRequired,
+  movies: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  discoverPage: makeSelectDiscoverPage(),
+  movies: makeSelectMovies(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    sendSortMovieRequest: options => dispatch(sendSortMovieRequest(options)),
   };
 }
 

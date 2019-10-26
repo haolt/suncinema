@@ -1,13 +1,20 @@
-/*
- *
- * DiscoverPage actions
- *
- */
+import {
+  SORT_MOVIE_REQUEST,
+  SORT_MOVIE_REQUEST_SUCCESS,
+  SORT_MOVIE_REQUEST_FAIL,
+} from './constants';
 
-import { DEFAULT_ACTION } from './constants';
+export const sendSortMovieRequest = payloads => ({
+  type: SORT_MOVIE_REQUEST,
+  payloads,
+});
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const sendSortMovieRequestSuccess = response => ({
+  type: SORT_MOVIE_REQUEST_SUCCESS,
+  response,
+});
+
+export const sendSortMovieRequestFail = errors => ({
+  type: SORT_MOVIE_REQUEST_FAIL,
+  errors,
+});

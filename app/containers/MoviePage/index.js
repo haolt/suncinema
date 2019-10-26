@@ -10,6 +10,8 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
 import MovieList from 'components/_moviePage/MovieList';
+import Pagination from 'components/_moviePage/Pagination';
+import SearchOptions from 'components/_moviePage/SearchOptions';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -25,17 +27,21 @@ export function MoviePage(props) {
   useInjectReducer({ key: 'moviePage', reducer });
   useInjectSaga({ key: 'moviePage', saga });
 
-  const { movies } = props;
+  const { movies, curentPage, total } = props;
   useEffect(() => {
     props.sendGetMovieRequest();
   }, []);
+  // console.log('curentPage: ', curentPage);
+  // console.log('total: ', total);
   return (
     <div>
       <Helmet>
         <title>Movies</title>
         <meta name="description" content="Description of MoviePage" />
       </Helmet>
+      <SearchOptions />
       <MovieList movies={movies} />
+      <Pagination curentPage={curentPage} total={total} />
     </div>
   );
 }
@@ -53,8 +59,8 @@ function mapDispatchToProps(dispatch) {
 
 MoviePage.propTypes = {
   movies: PropTypes.array.isRequired,
-  // curentPage: PropTypes.number.isRequired,
-  // total: PropTypes.number.isRequired,
+  curentPage: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
   sendGetMovieRequest: PropTypes.func.isRequired,
 };
 

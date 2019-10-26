@@ -134,7 +134,7 @@ export default function App() {
         <Navigate />
       </Drawer>
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        {/* <div className={classes.toolbar} /> */}
         <Switch>
           <Route exact path="/" component={MoviePage} />
           <Route exact path="/discover" component={DiscoverPage} />

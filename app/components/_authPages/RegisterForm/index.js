@@ -40,7 +40,6 @@ export default function RegisterForm(props) {
     props.sendRegisterRequest(values);
   };
   const { emailError, passwordError, nameError } = props;
-  console.log(emailError, passwordError, nameError );
 
   return (
     <div className={classes.root}>

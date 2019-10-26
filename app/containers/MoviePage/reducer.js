@@ -6,7 +6,7 @@ import { GET_MOVIE_REQUEST_SUCCESS, GET_MOVIE_REQUEST_FAIL } from './constants';
 export const initialState = {
   movies: [],
   page: 1,
-  total: 253,
+  total: 1,
 };
 
 const moviePageReducer = (state = initialState, action) => {

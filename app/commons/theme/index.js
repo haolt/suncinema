@@ -10,6 +10,7 @@ const theme = createMuiTheme({
     greylight: { main: '#B3BACB' },
     cyan: { main: '#13F5EE' },
     primary: { main: '#29344A' },
+    secondary: { main: '#e74c3c' },
   },
   typography: {
     fontFamily: 'Roboto',

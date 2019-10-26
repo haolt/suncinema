@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import PropTypes from 'prop-types';
+import defaultBanner from 'images/movie/defaultbanner.jpg';
 import useStyles from './useStyles';
 import './styles.css';
-
 function MovieItem(props) {
   const classes = useStyles();
   const { movie } = props;
@@ -16,9 +16,14 @@ function MovieItem(props) {
           <div className="container">
             <img
               alt={movie.title}
-              src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
+              src={
+                movie.backdrop_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+                  : defaultBanner
+              }
               className="layer1"
             />
+
             <div className="xam" />
             <div className="gradient" />
             <div className="hinhvuong" />

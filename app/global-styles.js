@@ -14,6 +14,9 @@ const GlobalStyle = createGlobalStyle`
   a, a:hover, a:focus, a:active {
     text-decoration: none;
   }
+  .MuiExpansionPanel-root:before {
+    display: none;
+  }
 `;
 
 export default GlobalStyle;

@@ -36,7 +36,7 @@ export default function LoginForm(props) {
       email: '',
       showPassword: false,
     });
-  }
+  };
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
