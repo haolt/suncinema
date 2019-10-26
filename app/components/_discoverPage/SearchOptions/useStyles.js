@@ -4,7 +4,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     background: 'transparent',
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
     boxShadow: 'none',
     padding: theme.spacing(2, 0),

@@ -9,9 +9,9 @@ import MovieList from 'components/_moviePage/MovieList';
 import useStyles from './useStyles';
 import categories from './categories';
 
-function DiscoverMovie(props) {
+function MovieCategories(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(1);
+  const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -46,9 +46,9 @@ function DiscoverMovie(props) {
   );
 }
 
-DiscoverMovie.propTypes = {
+MovieCategories.propTypes = {
   movies: PropTypes.array.isRequired,
   sendSortMovieRequest: PropTypes.func.isRequired,
 };
 
-export default DiscoverMovie;
+export default MovieCategories;

@@ -8,31 +8,31 @@ const makeSelectDiscoverPage = () =>
     selectDiscoverPageDomain,
     substate => substate,
   );
-const makeSelectOrder = () =>
+const makeSelectKeywords = () =>
   createSelector(
     selectDiscoverPageDomain,
-    substate => substate.order,
-  );
-const makeSelectSort = () =>
-  createSelector(
-    selectDiscoverPageDomain,
-    substate => substate.sort,
-  );
-const makeSelectPage = () =>
-  createSelector(
-    selectDiscoverPageDomain,
-    substate => substate.page,
+    substate => substate.keywords,
   );
 const makeSelectMovies = () =>
   createSelector(
     selectDiscoverPageDomain,
     substate => substate.movies,
   );
+const makeSelectResultCount = () =>
+  createSelector(
+    selectDiscoverPageDomain,
+    substate => substate.resultCount,
+  );
+const makeSelectHasRequestDone = () =>
+  createSelector(
+    selectDiscoverPageDomain,
+    substate => substate.hasRequestDone,
+  );
 export default makeSelectDiscoverPage;
 export {
   selectDiscoverPageDomain,
-  makeSelectOrder,
-  makeSelectSort,
-  makeSelectPage,
+  makeSelectKeywords,
   makeSelectMovies,
+  makeSelectResultCount,
+  makeSelectHasRequestDone,
 };

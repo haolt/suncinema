@@ -136,7 +136,7 @@ export default function App() {
       <main className={classes.content}>
         {/* <div className={classes.toolbar} /> */}
         <Switch>
-          <Route exact path="/" component={MoviePage} />
+          <Route exact path="/" component={DiscoverPage} />
           <Route exact path="/discover" component={DiscoverPage} />
           <Route exact path="/movies" component={MoviePage} />
           <Route path="/movies/:id" component={MovieDetailPage} />

@@ -1,36 +1,50 @@
 /* eslint-disable no-console */
 import {
-  SORT_MOVIE_REQUEST,
-  SORT_MOVIE_REQUEST_SUCCESS,
-  SORT_MOVIE_REQUEST_FAIL,
+  SEARCH_MOVIE_REQUEST,
+  SEARCH_MOVIE_REQUEST_SUCCESS,
+  SEARCH_MOVIE_REQUEST_FAIL,
+  RESET_DEFAULT,
 } from './constants';
 
 export const initialState = {
-  order: 2, // desc
-  sort: 2, // sort_by_release_date
-  page: 1,
+  keywords: '',
   movies: [],
+  resultCount: -1, // default
+  hasRequestDone: true,
 };
 
 const discoverPageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SORT_MOVIE_REQUEST:
+    case SEARCH_MOVIE_REQUEST:
+      console.log('REDUCER: ', {
+        ...state,
+        keywords: action.payloads,
+        hasRequestDone: false,
+      });
       return {
         ...state,
-        sort: action.payloads.sort,
+        keywords: action.payloads,
+        hasRequestDone: false,
       };
-    case SORT_MOVIE_REQUEST_SUCCESS:
-      // console.log({
-      //   ...state,
-      //   movies: action.response.data.data,
-      // });
+    case SEARCH_MOVIE_REQUEST_SUCCESS:
       return {
         ...state,
-        movies: action.response.data.data,
+        movies: action.response.data,
+        resultCount: action.response.data.length,
+        hasRequestDone: true,
       };
-    case SORT_MOVIE_REQUEST_FAIL:
-      // console.log(action);
-      return state;
+    case SEARCH_MOVIE_REQUEST_FAIL:
+      return {
+        ...state,
+        hasRequestDone: true,
+      };
+    case RESET_DEFAULT:
+      return {
+        ...state,
+        movies: [],
+        resultCount: -1,
+        hasRequestDone: true,
+      };
     default:
       return state;
   }

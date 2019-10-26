@@ -1,19 +1,20 @@
 import {
-  GET_MOVIE_REQUEST,
-  GET_MOVIE_REQUEST_SUCCESS,
-  GET_MOVIE_REQUEST_FAIL,
+  SORT_MOVIE_REQUEST,
+  SORT_MOVIE_REQUEST_SUCCESS,
+  SORT_MOVIE_REQUEST_FAIL,
 } from './constants';
 
-export const sendGetMovieRequest = () => ({
-  type: GET_MOVIE_REQUEST,
+export const sendSortMovieRequest = payloads => ({
+  type: SORT_MOVIE_REQUEST,
+  payloads,
 });
 
-export const sendGetMovieRequestSuccess = response => ({
-  type: GET_MOVIE_REQUEST_SUCCESS,
+export const sendSortMovieRequestSuccess = response => ({
+  type: SORT_MOVIE_REQUEST_SUCCESS,
   response,
 });
 
-export const sendGetMovieRequestFail = errors => ({
-  type: GET_MOVIE_REQUEST_FAIL,
+export const sendSortMovieRequestFail = errors => ({
+  type: SORT_MOVIE_REQUEST_FAIL,
   errors,
 });

@@ -1,55 +1,79 @@
-import React, { memo, useEffect } from 'react';
+/* eslint-disable no-console */
+/* eslint-disable prettier/prettier */
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import DiscoverMovie from 'components/_discoverPage/DiscoverMovie';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+import Advertisement from 'components/Advertisement';
+import CountResult from 'components/CountResult';
+import SearchOptions from 'components/_discoverPage/SearchOptions';
+import MovieList from 'components/_moviePage/MovieList';
+import FlexWrapper from 'components/_layouts/FlexWrapper';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { makeSelectMovies } from './selectors';
+import {
+  makeSelectMovies,
+  makeSelectResultCount,
+  makeSelectHasRequestDone,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { sendSortMovieRequest } from './actions';
+import { sendSearchMovieRequest } from './actions';
 
 export function DiscoverPage(props) {
   useInjectReducer({ key: 'discoverPage', reducer });
   useInjectSaga({ key: 'discoverPage', saga });
-
-  useEffect(() => {
-    props.sendSortMovieRequest({
-      sort: 2,
-    });
-  }, []);
-
+  console.log('CONTAINER: ', props.movies);
   return (
-    <div>
+    <>
       <Helmet>
-        <title>DiscoverPage</title>
+        <title>Discover Page</title>
         <meta name="description" content="Description of DiscoverPage" />
       </Helmet>
-      <DiscoverMovie
-        movies={props.movies}
-        sendSortMovieRequest={props.sendSortMovieRequest}
-      />
-    </div>
+      <Advertisement />
+      <SearchOptions sendSearchMovieRequest={props.sendSearchMovieRequest} />
+      {props.hasRequestDone ? (
+        <>
+          <FlexWrapper>
+            <CountResult resultCount={props.resultCount} />
+          </FlexWrapper>
+          <MovieList
+            movies={props.movies}
+            type="discoverPage"
+          />
+        </>
+      ) : (
+        <FlexWrapper>
+          <CircularProgress color="secondary" />
+        </FlexWrapper>
+      )}
+    </>
   );
 }
 
 DiscoverPage.propTypes = {
-  sendSortMovieRequest: PropTypes.func.isRequired,
+  sendSearchMovieRequest: PropTypes.func.isRequired,
   movies: PropTypes.array.isRequired,
+  resultCount: PropTypes.number.isRequired,
+  hasRequestDone: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   movies: makeSelectMovies(),
+  resultCount: makeSelectResultCount(),
+  hasRequestDone: makeSelectHasRequestDone(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
-    sendSortMovieRequest: options => dispatch(sendSortMovieRequest(options)),
+    sendSearchMovieRequest: options =>
+      dispatch(sendSearchMovieRequest(options)),
   };
 }
 

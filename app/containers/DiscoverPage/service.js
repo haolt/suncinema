@@ -1,7 +1,7 @@
 import Request from 'services/request';
 
-const sendSortMovieRequest = ({ sort, order, page }) =>
+const sendSearchMovieRequest = keywords =>
   Request.get({
-    url: `movies?sort=${sort}&order=${order}&page=${page}`,
+    url: `search?search=${keywords}`,
   });
-export default sendSortMovieRequest;
+export default sendSearchMovieRequest;

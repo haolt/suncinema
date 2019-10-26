@@ -1,24 +1,34 @@
-/* eslint-disable no-console */
-/* eslint-disable no-param-reassign */
-// import produce from 'immer';
-import { GET_MOVIE_REQUEST_SUCCESS, GET_MOVIE_REQUEST_FAIL } from './constants';
+import {
+  SORT_MOVIE_REQUEST,
+  SORT_MOVIE_REQUEST_SUCCESS,
+  SORT_MOVIE_REQUEST_FAIL,
+} from './constants';
 
 export const initialState = {
-  movies: [],
+  order: 2, // desc
+  sort: 1, // sort_by_popular
   page: 1,
-  total: 1,
+  movies: [],
 };
 
 const moviePageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_MOVIE_REQUEST_SUCCESS:
+    case SORT_MOVIE_REQUEST:
+      return {
+        ...state,
+        sort: action.payloads.sort,
+      };
+    case SORT_MOVIE_REQUEST_SUCCESS:
+      // console.log({
+      //   ...state,
+      //   movies: action.response.data.data,
+      // });
       return {
         ...state,
         movies: action.response.data.data,
-        page: action.response.data.page,
-        total: action.response.data.total,
       };
-    case GET_MOVIE_REQUEST_FAIL:
+    case SORT_MOVIE_REQUEST_FAIL:
+      // console.log(action);
       return state;
     default:
       return state;
@@ -26,20 +36,3 @@ const moviePageReducer = (state = initialState, action) => {
 };
 
 export default moviePageReducer;
-
-// const moviePageReducer = (state = initialState, action) =>
-//   produce(state, draft => {
-//     switch (action.type) {
-//       case GET_MOVIE_REQUEST:
-//         break;
-//       case GET_MOVIE_REQUEST_SUCCESS:
-//         draft = action.response.data;
-//         console.log('In Reducer: GET_MOVIE_REQUEST_SUCCESS', draft);
-//         break;
-//       case GET_MOVIE_REQUEST_FAIL:
-//         console.log('GET_MOVIE_REQUEST_FAIL: ', action);
-//         break;
-//       default:
-//         break;
-//     }
-//   });

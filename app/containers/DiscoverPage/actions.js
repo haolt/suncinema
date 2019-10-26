@@ -1,20 +1,24 @@
 import {
-  SORT_MOVIE_REQUEST,
-  SORT_MOVIE_REQUEST_SUCCESS,
-  SORT_MOVIE_REQUEST_FAIL,
+  SEARCH_MOVIE_REQUEST,
+  SEARCH_MOVIE_REQUEST_SUCCESS,
+  SEARCH_MOVIE_REQUEST_FAIL,
+  RESET_DEFAULT,
 } from './constants';
 
-export const sendSortMovieRequest = payloads => ({
-  type: SORT_MOVIE_REQUEST,
+export const sendSearchMovieRequest = payloads => ({
+  type: SEARCH_MOVIE_REQUEST,
   payloads,
 });
 
-export const sendSortMovieRequestSuccess = response => ({
-  type: SORT_MOVIE_REQUEST_SUCCESS,
+export const sendSearchMovieRequestSuccess = response => ({
+  type: SEARCH_MOVIE_REQUEST_SUCCESS,
   response,
 });
 
-export const sendSortMovieRequestFail = errors => ({
-  type: SORT_MOVIE_REQUEST_FAIL,
+export const sendSearchMovieRequestFail = errors => ({
+  type: SEARCH_MOVIE_REQUEST_FAIL,
   errors,
+});
+export const resetDefault = () => ({
+  type: RESET_DEFAULT,
 });

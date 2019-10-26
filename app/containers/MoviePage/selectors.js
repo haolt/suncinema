@@ -12,28 +12,32 @@ const makeSelectMoviePage = () =>
     substate => substate,
   );
 
-const makeSelectorMovies = () =>
+const makeSelectOrder = () =>
+  createSelector(
+    selectMoviePageDomain,
+    substate => substate.order,
+  );
+const makeSelectSort = () =>
+  createSelector(
+    selectMoviePageDomain,
+    substate => substate.sort,
+  );
+const makeSelectPage = () =>
+  createSelector(
+    selectMoviePageDomain,
+    substate => substate.page,
+  );
+const makeSelectMovies = () =>
   createSelector(
     selectMoviePageDomain,
     substate => substate.movies,
   );
 
-const makeSelectorCurrentPage = () =>
-  createSelector(
-    selectMoviePageDomain,
-    substate => substate.page,
-  );
-
-const makeSelectorTotal = () =>
-  createSelector(
-    selectMoviePageDomain,
-    substate => substate.total,
-  );
-
 export default makeSelectMoviePage;
 export {
   selectMoviePageDomain,
-  makeSelectorMovies,
-  makeSelectorCurrentPage,
-  makeSelectorTotal,
+  makeSelectOrder,
+  makeSelectSort,
+  makeSelectPage,
+  makeSelectMovies,
 };
