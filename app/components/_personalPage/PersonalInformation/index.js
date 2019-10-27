@@ -3,14 +3,12 @@
 /* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-// import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import FolderIcon from '@material-ui/icons/Folder';
@@ -24,7 +22,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
-// import CardActions from '@material-ui/core/CardActions';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Dialog from '@material-ui/core/Dialog';
@@ -42,25 +39,21 @@ const defaultAvatar =
 function PersonalInformation(props) {
   // Popover
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClosePopover = () => {
     setAnchorEl(null);
   };
-
   const openPopover = Boolean(anchorEl);
-  const options = openPopover ? 'simple-popover' : undefined;
 
   // Dialoge
   const [openDialoge, setOpenDialoge] = React.useState(false);
-
-  const handleClickOpenDialoge = () => {
+  const [contentDialogeType, setContentDialogeType] = React.useState('');
+  const handleClickOpenDialoge = type => {
     setOpenDialoge(true);
+    setContentDialogeType(type);
   };
-
   const handleCloseDialoge = () => {
     setOpenDialoge(false);
     handleClosePopover();
@@ -72,7 +65,7 @@ function PersonalInformation(props) {
     avatar,
     created_at,
     email,
-    email_verified_at,
+    // email_verified_at,
     id,
     name,
     updated_at,
@@ -86,7 +79,7 @@ function PersonalInformation(props) {
         <Card className={classes.paper}>
           <CardHeader
             action={
-              <IconButton aria-describedby={id} variant="contained" onClick={handleClick}>
+              <IconButton variant="contained" onClick={handleClick}>
                 <MoreVertIcon />
               </IconButton>
             }
@@ -106,8 +99,17 @@ function PersonalInformation(props) {
               horizontal: 'center',
             }}
           >
-            <Button variant="outlined" color="primary" onClick={handleClickOpenDialoge}>
-              Open alert dialog
+            <Button
+              onClick={() => handleClickOpenDialoge('update_user')}
+              className={classes.popoverOption}
+            >
+              Edit
+            </Button>
+            <Button
+              onClick={() => handleClickOpenDialoge('change_password')}
+              className={classes.popoverOption}
+            >
+              Change password
             </Button>
           </Popover>
           <CardContent>
@@ -222,8 +224,19 @@ function PersonalInformation(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-        <UpdateUser user={props.user} handleCloseDialoge={handleCloseDialoge} />
+        <DialogTitle id="alert-dialog-title">
+          {contentDialogeType === 'update_user'
+            ? 'Update Information'
+            : 'Change Password'}
+        </DialogTitle>
+        {contentDialogeType === 'update_user' ? (
+          <UpdateUser
+            user={props.user}
+            handleCloseDialoge={handleCloseDialoge}
+          />
+        ) : (
+          'bjnkl'
+        )}
       </Dialog>
     </Grid>
   );

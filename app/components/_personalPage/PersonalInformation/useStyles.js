@@ -31,5 +31,11 @@ const useStyles = makeStyles(theme => ({
     zIndex: '1',
     cursor: 'pointer',
   },
+  popoverOption: {
+    display: 'block',
+    margin: '0',
+    width: '100%',
+    textAlign: 'right',
+  },
 }));
 export default useStyles;

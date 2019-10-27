@@ -1,3 +1,5 @@
+/* eslint-disable no-unneeded-ternary */
+/* eslint-disable camelcase */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
@@ -22,8 +24,10 @@ function UpdateUserForm(props) {
 
   const submitUpdateUserForm = () => {
     props.sendUpdateUserRequest(values);
-    props.sendGetUserInfoRequest();
-    props.handleCloseDialoge();
+    setTimeout(() => {
+      props.handleCloseDialoge();
+      props.sendGetUserInfoRequest();
+    }, 200);
   };
   return (
     <Grid container spacing={0} className={classes.root}>
@@ -64,13 +68,19 @@ function UpdateUserForm(props) {
         </FormControl>
       </Grid>
       <Grid item xs={12} className={classes.groupBtns}>
-        <Button variant="contained" color="primary" className={classes.marginBtn}
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.marginBtn}
           onClick={props.handleCloseDialoge}
         >
           Cancel
         </Button>
-        <Button variant="contained" color="secondary"
-          onClick={submitUpdateUserForm} className={classes.marginBtn}
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={submitUpdateUserForm}
+          className={classes.marginBtn}
           disabled={values.name === ''}
         >
           Update

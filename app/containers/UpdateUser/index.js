@@ -11,14 +11,16 @@ import { sendGetUserInfoRequest } from 'containers/PersonalPage/actions';
 import watchPersonalPageSaga from 'containers/PersonalPage/saga';
 
 import UpdateUserForm from 'components/_personalPage/UpdateUserForm';
-import makeSelectUpdateUser from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { sendUpdateUserRequest } from './actions';
 
 export function UpdateUser(props) {
   useInjectReducer({ key: 'updateUser', reducer });
-  useInjectSaga({ key: 'updateUser', saga }, { key: 'personalPage', watchPersonalPageSaga });
+  useInjectSaga(
+    { key: 'updateUser', saga },
+    { key: 'personalPage', watchPersonalPageSaga },
+  );
   return (
     <UpdateUserForm
       user={props.user}
@@ -36,9 +38,7 @@ UpdateUser.propTypes = {
   user: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
-  updateUser: makeSelectUpdateUser(),
-});
+const mapStateToProps = createStructuredSelector({});
 
 function mapDispatchToProps(dispatch) {
   return {

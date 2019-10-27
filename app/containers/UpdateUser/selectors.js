@@ -20,4 +20,8 @@ const makeSelectHasUpdatedSuccess = () =>
   );
 
 export default makeSelectUpdateUser;
-export { selectUpdateUserDomain, makeSelectUpdatedUser, makeSelectHasUpdatedSuccess };
+export {
+  selectUpdateUserDomain,
+  makeSelectUpdatedUser,
+  makeSelectHasUpdatedSuccess,
+};

@@ -17,19 +17,11 @@ const updateUserReducer = (state = initialState, action) => {
         updatedUser: action.payloads,
       };
     case UPDATE_USER_REQUEST_SUCCESS:
-      console.log({
-        ...state,
-        hasUpdatedSuccess: true,
-      });
       return {
         ...state,
         hasUpdatedSuccess: true,
       };
     case UPDATE_USER_REQUEST_FAIL:
-      console.log({
-        ...state,
-        hasUpdatedSuccess: true,
-      });
       return {
         ...state,
         hasUpdatedSuccess: false,
