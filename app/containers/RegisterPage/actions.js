@@ -2,6 +2,7 @@ import {
   POST_REGISTER_REQUEST,
   POST_REGISTER_REQUEST_SUCCESS,
   POST_REGISTER_REQUEST_FAIL,
+  RESET_ERRORS,
 } from './constants';
 
 export const sendRegisterRequest = user => ({
@@ -17,4 +18,7 @@ export const sendRegisterRequestSuccess = response => ({
 export const sendRegisterRequestFail = response => ({
   type: POST_REGISTER_REQUEST_FAIL,
   response,
+});
+export const resetError = () => ({
+  type: RESET_ERRORS,
 });

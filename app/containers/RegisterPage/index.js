@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-console */
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -15,7 +15,7 @@ import RegisterForm from 'components/_authPages/RegisterForm';
 
 import reducer from './reducer';
 import saga from './saga';
-import { sendRegisterRequest } from './actions';
+import { sendRegisterRequest, resetError } from './actions';
 import {
   makeSelectRegisterStatus,
   makeSelectNameError,
@@ -37,6 +37,12 @@ export function RegisterPage(props) {
       props.history.push('/');
     }
   }
+  useEffect(
+    () => () => {
+      props.resetError();
+    },
+    [],
+  );
   return (
     <div>
       <Helmet>
@@ -62,6 +68,7 @@ RegisterPage.propTypes = {
   emailError: PropTypes.array,
   nameError: PropTypes.array,
   isRegisterSuccess: PropTypes.bool.isRequired,
+  resetError: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -74,6 +81,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     sendRegisterRequest: user => dispatch(sendRegisterRequest(user)),
+    resetError: () => dispatch(resetError()),
   };
 }
 

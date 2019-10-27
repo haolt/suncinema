@@ -3,6 +3,7 @@ import {
   POST_REGISTER_REQUEST,
   POST_REGISTER_REQUEST_SUCCESS,
   POST_REGISTER_REQUEST_FAIL,
+  RESET_ERRORS,
 } from './constants';
 
 export const initialState = {
@@ -34,6 +35,10 @@ const registerPageReducer = (state = initialState, action) => {
         nameError: action.response.data.name,
         emailError: action.response.data.email,
         passwordError: action.response.data.password,
+      };
+    case RESET_ERRORS:
+      return {
+        ...initialState,
       };
     default:
       return state;

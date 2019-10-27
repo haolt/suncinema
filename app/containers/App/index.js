@@ -48,48 +48,6 @@ export default function App() {
           [classes.appBarShift]: open,
         })}
       >
-        {/* <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton)}
-            // className={clsx(classes.menuButton, {
-            //   [classes.hide]: open,
-            // })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Hidden xsDown>
-            <div className={classes.navbar}>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search movies"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-              </div>
-              <div>
-                <IconButton
-                >
-                  <Badge badgeContent={2} color="secondary">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton color="inherit">
-                  <AccountCircle />
-                </IconButton>
-              </div>
-            </div>
-          </Hidden>
-        </Toolbar> */}
       </AppBar>
       <Drawer
         variant="permanent"

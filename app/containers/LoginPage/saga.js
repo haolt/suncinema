@@ -9,7 +9,6 @@ function* workerGetAMovieSaga() {
   const email = yield select(makeSelectEmail());
   const password = yield select(makeSelectPassword());
   const response = yield call(sendLoginRequest, { email, password });
-
   if (handleResponse(response)) {
     yield put(sendLoginRequestSuccess(response));
   } else {

@@ -31,7 +31,6 @@ const type = 'discoverPage';
 export function DiscoverPage(props) {
   useInjectReducer({ key: 'discoverPage', reducer });
   useInjectSaga({ key: 'discoverPage', saga });
-  console.log('CONTAINER: ', props.movies);
   return (
     <>
       <Helmet>

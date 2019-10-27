@@ -1,9 +1,12 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+
+import { getCookie } from 'services/cookie';
+import { ACCESS_TOKEN } from 'commons/constants';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -11,7 +14,7 @@ import { useInjectReducer } from 'utils/injectReducer';
 import FlexWrapper from 'components/_layouts/FlexWrapper';
 import LoginForm from 'components/_authPages/LoginForm';
 
-import { sendLoginRequest } from './actions';
+import { sendLoginRequest, resetError } from './actions';
 import {
   makeSelectLoginStatus,
   makeSelectEmailError,
@@ -24,9 +27,15 @@ import saga from './saga';
 export function LoginPage(props) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
-  if (props.isLoginSuccess) {
+  if (props.isLoginSuccess && getCookie(ACCESS_TOKEN)) {
     props.history.push('/');
   }
+  useEffect(
+    () => () => {
+      props.resetError();
+    },
+    [],
+  );
   return (
     <div>
       <Helmet>
@@ -51,6 +60,7 @@ LoginPage.propTypes = {
   emailError: PropTypes.array,
   isLoginSuccess: PropTypes.bool.isRequired,
   sendLoginRequest: PropTypes.func.isRequired,
+  resetError: PropTypes.func,
   history: PropTypes.object,
 };
 
@@ -64,6 +74,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     sendLoginRequest: user => dispatch(sendLoginRequest(user)),
+    resetError: () => dispatch(resetError()),
   };
 }
 
