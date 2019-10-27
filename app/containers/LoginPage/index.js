@@ -27,7 +27,7 @@ import saga from './saga';
 export function LoginPage(props) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
-  if (props.isLoginSuccess && getCookie(ACCESS_TOKEN)) {
+  if ((props.isLoginSuccess && getCookie(ACCESS_TOKEN)) || getCookie(ACCESS_TOKEN)) {
     props.history.push('/');
   }
   useEffect(

@@ -19,41 +19,108 @@ import EditIcon from '@material-ui/icons/Edit';
 import Avatar from '@material-ui/core/Avatar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Card from '@material-ui/core/Card';
-// import CardActions from '@material-ui/core/CardActions';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import useStyles from './useStyles';
+import Popover from '@material-ui/core/Popover';
+import Button from '@material-ui/core/Button';
+// import CardActions from '@material-ui/core/CardActions';
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
+import UpdateUser from 'containers/UpdateUser';
+
+import useStyles from './useStyles';
 const defaultAvatar =
   'https://3.bp.blogspot.com/-AEkny-9Y0Uw/W8YBZnD7oJI/AAAAAAAybmk/35h9UBHIQxk8OE_b8uqtw8gmYJ5XbOKpgCLcBGAs/s1600/AW2040870_20.gif';
 
 function PersonalInformation(props) {
+  // Popover
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClosePopover = () => {
+    setAnchorEl(null);
+  };
+
+  const openPopover = Boolean(anchorEl);
+  const options = openPopover ? 'simple-popover' : undefined;
+
+  // Dialoge
+  const [openDialoge, setOpenDialoge] = React.useState(false);
+
+  const handleClickOpenDialoge = () => {
+    setOpenDialoge(true);
+  };
+
+  const handleCloseDialoge = () => {
+    setOpenDialoge(false);
+    handleClosePopover();
+  };
+
+  // Me
   const classes = useStyles();
   const {
     avatar,
     created_at,
     email,
-    // email_verified_at,
+    email_verified_at,
     id,
     name,
     updated_at,
+    phone_number,
+    address,
+    visa_number,
   } = props.user;
-  // console.log('Personal Information: ', props.user);
   return (
     <Grid container spacing={3}>
       <Grid item md={8} xs={12}>
         <Card className={classes.paper}>
+          <CardHeader
+            action={
+              <IconButton aria-describedby={id} variant="contained" onClick={handleClick}>
+                <MoreVertIcon />
+              </IconButton>
+            }
+            title="Account Information"
+          />
+          <Popover
+            id={id}
+            open={openPopover}
+            anchorEl={anchorEl}
+            onClose={handleClosePopover}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <Button variant="outlined" color="primary" onClick={handleClickOpenDialoge}>
+              Open alert dialog
+            </Button>
+          </Popover>
           <CardContent>
-            <Typography color="textSecondary" variant="h3" gutterBottom>
-              Word of the Day
-            </Typography>
             <Divider />
             <Grid container spacing={1}>
               <Grid item md={3} xs={12}>
-                <Avatar
-                  alt="avatar"
-                  src={avatar || defaultAvatar}
-                  className={classes.avatar}
-                />
+                <div className={classes.avatarWrapper}>
+                  <Avatar
+                    alt="avatar"
+                    src={avatar || defaultAvatar}
+                    className={classes.avatar}
+                  />
+                </div>
               </Grid>
               <Grid item md={5} xs={12}>
                 <List dense={true}>
@@ -64,13 +131,6 @@ function PersonalInformation(props) {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={name} />
-                    <ListItemSecondaryAction>
-                      <Tooltip title="Edit" aria-label="Edit">
-                        <IconButton edge="end" aria-label="Edit">
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </ListItemSecondaryAction>
                   </ListItem>
                   <ListItem>
                     <ListItemAvatar>
@@ -79,13 +139,6 @@ function PersonalInformation(props) {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText primary={email} />
-                    <ListItemSecondaryAction>
-                      <Tooltip title="Edit" aria-label="Edit">
-                        <IconButton edge="end" aria-label="Edit">
-                          <EditIcon />
-                        </IconButton>
-                      </Tooltip>
-                    </ListItemSecondaryAction>
                   </ListItem>
                   <ListItem>
                     <ListItemAvatar>
@@ -93,7 +146,15 @@ function PersonalInformation(props) {
                         <FolderIcon />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary="Password: ******" />
+                    <ListItemText primary="******" />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <FolderIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={phone_number && phone_number} />
                   </ListItem>
                 </List>
               </Grid>
@@ -128,14 +189,15 @@ function PersonalInformation(props) {
                         <FolderIcon />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText
-                      primary={`First touch: ${updated_at &&
-                        updated_at
-                          .substring(0, 10)
-                          .split('-')
-                          .reverse()
-                          .join('/')}`}
-                    />
+                    <ListItemText primary={visa_number && visa_number} />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <FolderIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={address && address} />
                   </ListItem>
                 </List>
               </Grid>
@@ -145,23 +207,24 @@ function PersonalInformation(props) {
       </Grid>
       <Grid item md={4} xs={12}>
         <Card className={classes.paper}>
+          <CardHeader title="Action Histories" />
           <CardContent>
-            <Typography color="textSecondary" gutterBottom>
-              Word of the Day
-            </Typography>
             <Divider />
-            <Typography variant="h5" component="h2">
-              be lent
-            </Typography>
-            <Typography color="textSecondary">adjective</Typography>
-            <Typography variant="body2" component="p">
-              well meaning and kindly.
-              <br />
-              {'"a benevolent smile"'}
+            <Typography component="p">
+              lorem sdf well meaning and kindly.
             </Typography>
           </CardContent>
         </Card>
       </Grid>
+      <Dialog
+        open={openDialoge}
+        onClose={handleCloseDialoge}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+        <UpdateUser user={props.user} handleCloseDialoge={handleCloseDialoge} />
+      </Dialog>
     </Grid>
   );
 }
