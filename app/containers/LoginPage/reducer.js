@@ -41,7 +41,12 @@ const loginPageReducer = (state = initialState, action) => {
       };
     case RESET_ERRORS:
       return {
-        ...initialState,
+        ...state,
+        email: '',
+        password: '',
+        emailError: [''],
+        passwordError: [''],
+        error: '',
       };
     default:
       return state;

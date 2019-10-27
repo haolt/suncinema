@@ -38,7 +38,14 @@ const registerPageReducer = (state = initialState, action) => {
       };
     case RESET_ERRORS:
       return {
-        ...initialState,
+        ...state,
+        email: '',
+        password: '',
+        password_confirmation: '',
+        name: '',
+        nameError: [''],
+        emailError: [''],
+        passwordError: [''],
       };
     default:
       return state;
