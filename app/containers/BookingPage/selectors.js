@@ -1,25 +1,32 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-/**
- * Direct selector to the bookingPage state domain
- */
-
 const selectBookingPageDomain = state => state.bookingPage || initialState;
-
-/**
- * Other specific selectors
- */
-
-/**
- * Default selector used by BookingPage
- */
 
 const makeSelectBookingPage = () =>
   createSelector(
     selectBookingPageDomain,
     substate => substate,
   );
-
+const makeSelectBookableSeat = () =>
+  createSelector(
+    selectBookingPageDomain,
+    substate => substate.bookableSeat,
+  );
+const makeSelectUpdatedAt = () =>
+  createSelector(
+    selectBookingPageDomain,
+    substate => substate.updatedAt,
+  );
+const makeSelectorMovieID = () =>
+  createSelector(
+    selectBookingPageDomain,
+    substate => substate.movieID,
+  );
 export default makeSelectBookingPage;
-export { selectBookingPageDomain };
+export {
+  selectBookingPageDomain,
+  makeSelectBookableSeat,
+  makeSelectUpdatedAt,
+  makeSelectorMovieID,
+};

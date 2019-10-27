@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 /**
  *
  * MovieDetailPage
@@ -6,7 +5,7 @@
  */
 
 import React, { memo, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
@@ -25,7 +24,6 @@ export function MovieDetailPage(props) {
   useInjectSaga({ key: 'movieDetailPage', saga });
   useEffect(() => {
     const currentID = props.match.params.id;
-    // console.log(currentID);
     props.sendGetAMovieRequest(currentID);
   }, []);
   return (
@@ -40,7 +38,9 @@ export function MovieDetailPage(props) {
 }
 
 MovieDetailPage.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
+  sendGetAMovieRequest: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  currentMovie: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

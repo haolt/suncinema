@@ -9,7 +9,6 @@ const GlobalStyle = createGlobalStyle`
   }
   img {
     width: 100%;
-    height: 100%;
   }
   a, a:hover, a:focus, a:active {
     text-decoration: none;

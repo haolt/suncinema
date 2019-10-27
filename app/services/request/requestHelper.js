@@ -12,6 +12,6 @@ export default function requestHelper({ method, options }) {
       Authorization: `Bearer ${getCookie(ACCESS_TOKEN)}`,
     },
   })
-  .then(response => response)
-  .catch(err => err.response);
+    .then(response => response)
+    .catch(err => err.response);
 }

@@ -22,6 +22,7 @@ import MovieDetailPage from 'containers/MovieDetailPage/Loadable';
 import BookingPage from 'containers/BookingPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import PersonalPage from 'containers/PersonalPage/Loadable';
+import BookingSeatLandingPage from 'components/_bookingPage/BookingSeatLandingPage';
 import useStyles from './useStyles';
 
 export default function App() {
@@ -140,7 +141,8 @@ export default function App() {
           <Route exact path="/discover" component={DiscoverPage} />
           <Route exact path="/movies" component={MoviePage} />
           <Route path="/movies/:id" component={MovieDetailPage} />
-          <Route exact path="/booking" component={BookingPage} />
+          <Route exact path="/booking" component={BookingSeatLandingPage} />
+          <Route exact path="/booking/:id" component={BookingPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/me" component={PersonalPage} />

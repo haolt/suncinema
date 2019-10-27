@@ -22,12 +22,6 @@ const moviePageReducer = (state = initialState, action) => {
         page: action.payloads.page ? action.payloads.page : state.page,
       };
     case SORT_MOVIE_REQUEST_SUCCESS:
-      console.log({
-        ...state,
-        movies: action.response.data.data,
-        page: action.response.data.page,
-        pageTotal: Math.ceil(action.response.data.total / 10),
-      });
       return {
         ...state,
         movies: action.response.data.data,
@@ -35,7 +29,6 @@ const moviePageReducer = (state = initialState, action) => {
         pageTotal: Math.ceil(action.response.data.total / 10),
       };
     case SORT_MOVIE_REQUEST_FAIL:
-      // console.log(action);
       return state;
     default:
       return state;
