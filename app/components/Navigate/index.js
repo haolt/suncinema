@@ -22,7 +22,7 @@ const Navigate = props => {
   return (
     <>
       <List>
-        <NavLink to="/discover" activeClassName="selected" key="discover">
+        <NavLink className={classes.item} to="/discover" activeClassName="selected" key="discover">
           <Tooltip title="Discover">
             <ListItem button>
               <ListItemIcon>
@@ -32,7 +32,7 @@ const Navigate = props => {
             </ListItem>
           </Tooltip>
         </NavLink>
-        <NavLink to="/movies" activeClassName="selected" key="movies">
+        <NavLink className={classes.item} to="/movies" activeClassName="selected" key="movies">
           <Tooltip title="Movies">
             <ListItem button>
               <ListItemIcon>
@@ -42,7 +42,7 @@ const Navigate = props => {
             </ListItem>
           </Tooltip>
         </NavLink>
-        <NavLink to="/booking" activeClassName="selected" key="booking">
+        <NavLink className={classes.item} to="/booking" activeClassName="selected" key="booking">
           <Tooltip title="Booking">
             <ListItem button>
               <ListItemIcon>
@@ -55,7 +55,7 @@ const Navigate = props => {
       </List>
       <Divider />
       <List>
-        <NavLink to="/login" activeClassName="selected" key="Login">
+        <NavLink className={classes.item} to="/login" activeClassName="selected" key="Login">
           <Tooltip title="Login">
             <ListItem button>
               <ListItemIcon>
@@ -65,7 +65,7 @@ const Navigate = props => {
             </ListItem>
           </Tooltip>
         </NavLink>
-        <NavLink to="/register" activeClassName="selected" key="Register">
+        <NavLink className={classes.item} to="/register" activeClassName="selected" key="Register">
           <Tooltip title="Register">
             <ListItem button>
               <ListItemIcon>
@@ -78,7 +78,7 @@ const Navigate = props => {
       </List>
       <Divider />
       <List>
-        <NavLink to="/me" activeClassName="selected" key="me">
+        <NavLink className={classes.item} to="/me" activeClassName="selected" key="me">
           <Tooltip title="Me">
             <ListItem button>
               <ListItemIcon>

@@ -102,7 +102,7 @@ export default class Slideshow extends React.Component {
               {/* <div className="number-text">
                 {`${index + 1} / ${this.props.input.length}`}
               </div> */}
-              <Link to="/booking">
+              <Link to="/movies">
                 <img className="image" src={image.src} alt={image.caption} />
               </Link>
               {/* <div className="caption-text">{image.caption}</div> */}

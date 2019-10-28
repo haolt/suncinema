@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import Footer from 'components/Footer';
 import MovieCategories from 'components/_moviePage/MovieCategories';
 import MovieList from 'components/_moviePage/MovieList';
 import FlexWrapper from 'components/_layouts/FlexWrapper';
@@ -49,6 +50,7 @@ export function MoviePage(props) {
           sendSortMovieRequest={props.sendSortMovieRequest}
         />
       </FlexWrapper>
+      <Footer />
     </>
   );
 }

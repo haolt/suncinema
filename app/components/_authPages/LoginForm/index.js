@@ -10,14 +10,14 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
-
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
+import login from 'images/logos/login.png';
 import useStyles from './useStyles';
+import './styles.css';
 
 export default function LoginForm(props) {
   const classes = useStyles();
@@ -47,19 +47,20 @@ export default function LoginForm(props) {
   };
   const { emailError, passwordError, error } = props;
   return (
-    <form className={classes.root}>
-      <Typography variant="h3" component="h3">
-        Login
-      </Typography>
+    <form className={classes.root} autoComplete="off">
+      <div className={classes.title}>
+        <img src={login} alt="login" />
+      </div>
       <FormControl fullWidth className={classes.margin}>
         <TextField
           label="Email"
           id="email"
           value={values.email}
           onChange={handleChange('email')}
+          className={classes.txtField}
         />
       </FormControl>
-      {emailError}
+      <span className={classes.error}>{emailError}</span>
       <FormControl fullWidth className={classes.margin}>
         <InputLabel htmlFor="adornment-password">Password</InputLabel>
         <Input
@@ -80,9 +81,10 @@ export default function LoginForm(props) {
           }
         />
       </FormControl>
-      {passwordError}
+      <span className={classes.error}>{passwordError}</span>
       <Button
-        variant="outlined"
+        variant="contained"
+        color="secondary"
         size="medium"
         className={classes.marginBtn}
         fullWidth

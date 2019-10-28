@@ -11,7 +11,7 @@ import { ACCESS_TOKEN } from 'commons/constants';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
-import FlexWrapper from 'components/_layouts/FlexWrapper';
+import FlexWrapperLP from 'components/_layouts/FlexWrapperLP';
 import LoginForm from 'components/_authPages/LoginForm';
 
 import { sendLoginRequest, resetError } from './actions';
@@ -42,14 +42,14 @@ export function LoginPage(props) {
         <title>LoginPage</title>
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
-      <FlexWrapper>
+      <FlexWrapperLP>
         <LoginForm
           sendLoginRequest={props.sendLoginRequest}
           emailError={props.emailError}
           passwordError={props.passwordError}
           error={props.error}
         />
-      </FlexWrapper>
+      </FlexWrapperLP>
     </div>
   );
 }

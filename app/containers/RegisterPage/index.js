@@ -10,7 +10,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
-import FlexWrapper from 'components/_layouts/FlexWrapper';
+import FlexWrapperLP from 'components/_layouts/FlexWrapperLP';
 import RegisterForm from 'components/_authPages/RegisterForm';
 
 import reducer from './reducer';
@@ -49,14 +49,14 @@ export function RegisterPage(props) {
         <title>RegisterPage</title>
         <meta name="description" content="Description of RegisterPage" />
       </Helmet>
-      <FlexWrapper>
+      <FlexWrapperLP>
         <RegisterForm
           sendRegisterRequest={props.sendRegisterRequest}
           emailError={props.emailError}
           passwordError={props.passwordError}
           nameError={props.nameError}
         />
-      </FlexWrapper>
+      </FlexWrapperLP>
     </div>
   );
 }

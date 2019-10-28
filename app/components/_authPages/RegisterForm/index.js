@@ -15,7 +15,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-
+import register from 'images/logos/register.png';
 import useStyles from './useStyles';
 
 export default function RegisterForm(props) {
@@ -42,10 +42,10 @@ export default function RegisterForm(props) {
   const { emailError, passwordError, nameError } = props;
 
   return (
-    <div className={classes.root}>
-      <Typography variant="h3" component="h3">
-        Register
-      </Typography>
+    <form className={classes.root} autoComplete="off">
+      <div className={classes.title}>
+        <img src={register} alt="register" />
+      </div>
       <FormControl fullWidth className={classes.margin}>
         <TextField
           label="Name"
@@ -53,9 +53,10 @@ export default function RegisterForm(props) {
           type="text"
           value={values.name}
           onChange={handleChange('name')}
+          autoComplete="off"
         />
       </FormControl>
-      {nameError}
+      <span className={classes.error}>{nameError}</span>
       <FormControl fullWidth className={classes.margin}>
         <TextField
           label="Email"
@@ -63,9 +64,10 @@ export default function RegisterForm(props) {
           type="email"
           value={values.email}
           onChange={handleChange('email')}
+          autoComplete="off"
         />
       </FormControl>
-      {emailError}
+      <span className={classes.error}>{emailError}</span>
       <FormControl fullWidth className={classes.margin}>
         <InputLabel htmlFor="adornment-password">Password</InputLabel>
         <Input
@@ -86,11 +88,11 @@ export default function RegisterForm(props) {
           }
         />
       </FormControl>
-      {passwordError
+      <span className={classes.error}>{passwordError
         ? passwordError.length === 2
           ? passwordError[0]
           : ''
-        : ''}
+        : ''}</span>
       <FormControl fullWidth className={classes.margin}>
         <InputLabel htmlFor="adornment-password">Retype password</InputLabel>
         <Input
@@ -101,9 +103,10 @@ export default function RegisterForm(props) {
           onChange={handleChange('password_confirmation')}
         />
       </FormControl>
-      {passwordError ? passwordError[passwordError.length - 1] : ''}
+      <span className={classes.error}>{passwordError ? passwordError[passwordError.length - 1] : ''}</span>
       <Button
-        variant="outlined"
+        variant="contained"
+        color="secondary"
         size="medium"
         className={classes.marginBtn}
         fullWidth
@@ -111,7 +114,7 @@ export default function RegisterForm(props) {
       >
         Register
       </Button>
-    </div>
+    </form>
   );
 }
 

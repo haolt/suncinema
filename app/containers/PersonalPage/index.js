@@ -6,6 +6,8 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import Grid from '@material-ui/core/Grid';
 import PersonalInformation from 'components/_personalPage/PersonalInformation';
+import FlexWrapperLP from 'components/_layouts/FlexWrapperLP';
+import MessageBox from 'components/MessageBox';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
@@ -39,7 +41,9 @@ export function PersonalPage(props) {
       {((props.isLoginSuccess && getCookie(ACCESS_TOKEN)) || getCookie(ACCESS_TOKEN)) ? (
         <PersonalInformation user={props.personalPage} />
       ) : (
-        'Login đuê !'
+        <FlexWrapperLP>
+          <MessageBox />
+        </FlexWrapperLP>
       )}
     </div>
   );

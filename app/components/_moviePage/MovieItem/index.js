@@ -25,7 +25,7 @@ function MovieItem(props) {
                       ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
                       : defaultBannerDiscover
                   }
-                  className="layer1"
+                  className="movieImg"
                 />
               ) : (
                 <img
@@ -35,15 +35,13 @@ function MovieItem(props) {
                       ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
                       : defaultBanner
                   }
-                  className="layer1"
+                  className="movieImg"
                 />
               )
             }
-            <div className="xam" />
             <div className="gradient" />
-            <div className="hinhvuong" />
-            <div className="chuto">{movie.title}</div>
-            {/* <div className="chunho">Lorem is raput nhus via facebook.com</div> */}
+            <div className="square" />
+            <div className="title">{movie.title}</div>
           </div>
           <div className="genres">
             {movie.genres

@@ -19,6 +19,10 @@ const GlobalStyle = createGlobalStyle`
   a:hover span, a:focus span, a:active span, a.selected span {
     color: #ff7675;
   }
+  .MuiCardHeader-title.MuiTypography-h5 {
+    color: #ff7675;
+    font-size: 1.4em;
+  }
 `;
 
 export default GlobalStyle;

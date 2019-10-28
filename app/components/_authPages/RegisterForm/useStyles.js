@@ -16,5 +16,13 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1),
   },
+  title: {
+    width: '100%',
+    minWidth: '100px',
+    margin: 'auto',
+  },
+  error: {
+    color: '#bf2e2d',
+  },
 }));
 export default useStyles;

@@ -13,7 +13,7 @@ const Advertisement = () => (
   <div className="App">
     <Slideshow
       input={collection}
-      ratio="10:2"
+      ratio="10:3"
       mode="automatic"
       timeout="3000"
     />

@@ -39,6 +39,17 @@ const useStyles = makeStyles(theme => ({
   },
   dialogTitle: {
     textAlign: 'center',
+    color: '#333',
+    textTransform: 'uppercase',
+  },
+  content: {
+    color: '#ffffffd4',
+  },
+  icon: {
+    color: '#ffffffd4',
+  },
+  contentGrid: {
+    padding: '2em 0',
   },
 }));
 export default useStyles;

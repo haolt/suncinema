@@ -11,6 +11,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import FolderIcon from '@material-ui/icons/Folder';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
@@ -20,11 +21,22 @@ import CardContent from '@material-ui/core/CardContent';
 import Popover from '@material-ui/core/Popover';
 import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import SimCardIcon from '@material-ui/icons/SimCard';
+import RoomIcon from '@material-ui/icons/Room';
+import EditIcon from '@material-ui/icons/Edit';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import UpdateUser from 'containers/UpdateUser';
 import ChangePassword from 'containers/ChangePassword';
+import UploadFile from 'components/_personalPage/UploadFile';
 
 import useStyles from './useStyles';
 const defaultAvatar =
@@ -74,7 +86,7 @@ function PersonalInformation(props) {
           <CardHeader
             action={
               <IconButton variant="contained" onClick={handleClick}>
-                <MoreVertIcon />
+                <MoreVertIcon className={classes.icon} />
               </IconButton>
             }
             title="Account Information"
@@ -106,11 +118,14 @@ function PersonalInformation(props) {
               Change password
             </Button>
           </Popover>
-          <CardContent>
+          <CardContent className={classes.content}>
             <Divider />
-            <Grid container spacing={1}>
+            <Grid container spacing={1} className={classes.contentGrid}>
               <Grid item md={3} xs={12}>
                 <div className={classes.avatarWrapper}>
+                  <IconButton className={classes.avatarBtn} onClick={() => handleClickOpenDialoge('upload_file')}>
+                    <EditIcon />
+                  </IconButton>
                   <Avatar
                     alt="avatar"
                     src={avatar || defaultAvatar}
@@ -121,35 +136,27 @@ function PersonalInformation(props) {
               <Grid item md={5} xs={12}>
                 <List dense={true}>
                   <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
+                    <ListItemIcon>
+                      <PermIdentityIcon className={classes.icon} />
+                    </ListItemIcon>
                     <ListItemText primary={name} />
                   </ListItem>
                   <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
+                    <ListItemIcon>
+                      <MailOutlineIcon className={classes.icon} />
+                    </ListItemIcon>
                     <ListItemText primary={email} />
                   </ListItem>
                   <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
+                    <ListItemIcon>
+                      <LockOpenIcon className={classes.icon} />
+                    </ListItemIcon>
                     <ListItemText primary="******" />
                   </ListItem>
                   <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
+                    <ListItemIcon>
+                      <PhoneAndroidIcon className={classes.icon} />
+                    </ListItemIcon>
                     <ListItemText primary={phone_number && phone_number} />
                   </ListItem>
                 </List>
@@ -157,11 +164,9 @@ function PersonalInformation(props) {
               <Grid item md={4} xs={12}>
                 <List dense={true}>
                   <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
+                    <ListItemIcon>
+                      <WhatshotIcon className={classes.icon} />
+                    </ListItemIcon>
                     <ListItemText
                       primary={`First touch: ${created_at &&
                         created_at
@@ -172,27 +177,21 @@ function PersonalInformation(props) {
                     />
                   </ListItem>
                   <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
+                    <ListItemIcon>
+                      <LoyaltyIcon className={classes.icon} />
+                    </ListItemIcon>
                     <ListItemText primary={`#sunner_${id}`} />
                   </ListItem>
                   <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
+                    <ListItemIcon>
+                      <SimCardIcon className={classes.icon} />
+                    </ListItemIcon>
                     <ListItemText primary={visa_number && visa_number} />
                   </ListItem>
                   <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon />
-                      </Avatar>
-                    </ListItemAvatar>
+                    <ListItemIcon>
+                      <RoomIcon className={classes.icon} />
+                    </ListItemIcon>
                     <ListItemText primary={address && address} />
                   </ListItem>
                 </List>
@@ -203,12 +202,50 @@ function PersonalInformation(props) {
       </Grid>
       <Grid item md={4} xs={12}>
         <Card className={classes.paper}>
-          <CardHeader title="Action Histories" />
-          <CardContent>
+          <CardHeader
+            action={
+              <IconButton variant="contained">
+                <MoreVertIcon className={classes.icon} />
+              </IconButton>
+            }
+            title="Action Histories"
+          />
+          <CardContent className={classes.content}>
             <Divider />
-            <Typography component="p">
-              lorem sdf well meaning and kindly.
-            </Typography>
+            <List dense={true} className={classes.contentGrid}>
+              <ListItem>
+                <ListItemIcon>
+                  <AccessTimeIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={`${name} changed Info. (15mins ago)`}
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <AccessTimeIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={`${name} view movielist.(2 hours ago)`}
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <AccessTimeIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={`${name} loged in. (1 day ago)`}
+                />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <AccessTimeIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={`${name} registered. (1 week ago)`}
+                />
+              </ListItem>
+            </List>
           </CardContent>
         </Card>
       </Grid>
@@ -221,7 +258,7 @@ function PersonalInformation(props) {
         <DialogTitle className={classes.dialogTitle}>
           {contentDialogeType === 'update_user'
             ? 'Update Information'
-            : 'Change Password'}
+            : (contentDialogeType === 'upload_file' ? 'Update Avatar' : 'Change Password' )}
         </DialogTitle>
         {contentDialogeType === 'update_user' ? (
           <UpdateUser
@@ -229,13 +266,16 @@ function PersonalInformation(props) {
             handleCloseDialoge={handleCloseDialoge}
           />
         ) : (
-          <ChangePassword />
+          contentDialogeType === 'upload_file' ? (
+            <UploadFile />
+          ): (
+            <ChangePassword />
+          )
         )}
       </Dialog>
     </Grid>
   );
 }
-
 PersonalInformation.propTypes = {
   user: PropTypes.object.isRequired,
 };

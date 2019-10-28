@@ -8,5 +8,8 @@ const styles = {
       color: '#e74c3c',
     },
   },
+  item: {
+    cursor: 'pointer',
+  },
 };
 export default styles;

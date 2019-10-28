@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     color: '#fff',
     background: '#334458',
-    cursor: 'pointer',
+    marginTop: '2em',
   },
 }));
 export default useStyles;

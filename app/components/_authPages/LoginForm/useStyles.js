@@ -12,9 +12,20 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  txtField: {
+    color: '#fff',
+  },
   marginBtn: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(1),
+  },
+  title: {
+    width: '30%',
+    minWidth: '100px',
+    margin: 'auto',
+  },
+  error: {
+    color: '#bf2e2d',
   },
 }));
 export default useStyles;
