@@ -27,6 +27,12 @@ const discoverPageReducer = (state = initialState, action) => {
         hasRequestDone: false,
       };
     case SEARCH_MOVIE_REQUEST_SUCCESS:
+      console.log(' Reducer: ', {
+        ...state,
+        movies: action.response.data,
+        resultCount: action.response.data.length,
+        hasRequestDone: true,
+      });
       return {
         ...state,
         movies: action.response.data,

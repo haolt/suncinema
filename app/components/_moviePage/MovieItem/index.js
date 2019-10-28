@@ -56,10 +56,12 @@ function MovieItem(props) {
                 ))
               : ''}
           </div>
-          <div className="genres">
-            {Array(Math.ceil(movie.vote_average/2)).fill(<StarIcon />)}
-            {Array(5 - Math.ceil(movie.vote_average/2)).fill(<StarBorderIcon />)}
-          </div>
+          {/* <div className="genres">
+            {
+              Array(Math.ceil(movie.vote_average/2)).fill(<StarIcon />)
+              Array(5 - Math.ceil(movie.vote_average/2)).fill(<StarBorderIcon />)
+            }
+          </div> */}
         </Paper>
       </Link>
     </Grid>

@@ -61,7 +61,7 @@ export function DiscoverPage(props) {
 DiscoverPage.propTypes = {
   sendSearchMovieRequest: PropTypes.func.isRequired,
   movies: PropTypes.array.isRequired,
-  resultCount: PropTypes.number.isRequired,
+  resultCount: PropTypes.number,
   hasRequestDone: PropTypes.bool.isRequired,
 };
 

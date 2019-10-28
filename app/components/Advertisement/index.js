@@ -5,9 +5,9 @@ import ads1 from 'images/ads/ads1.jpg';
 // import ads2 from 'images/ads/ads2.jpg';
 import ads3 from 'images/ads/ads3.jpg';
 // import ads4 from 'images/ads/ads4.png';
-import ads5 from 'images/ads/ads5.jpg';
+// import ads5 from 'images/ads/ads5.jpg';
 
-const collection = [{ src: ads1 }, { src: ads3 }, { src: ads5 }];
+const collection = [{ src: ads1 }, { src: ads3 }];
 
 const Advertisement = () => (
   <div className="App">
