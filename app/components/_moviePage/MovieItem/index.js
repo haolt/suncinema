@@ -3,11 +3,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
 import PropTypes from 'prop-types';
 import defaultBanner from 'images/movie/defaultbanner.jpg';
 import defaultBannerDiscover from 'images/movie/defaultbanner-discover.jpg';
 import useStyles from './useStyles';
 import './styles.css';
+
 function MovieItem(props) {
   const classes = useStyles();
   const { movie, type } = props;
@@ -52,6 +55,10 @@ function MovieItem(props) {
                   </span>
                 ))
               : ''}
+          </div>
+          <div className="genres">
+            {Array(Math.ceil(movie.vote_average/2)).fill(<StarIcon />)}
+            {Array(5 - Math.ceil(movie.vote_average/2)).fill(<StarBorderIcon />)}
           </div>
         </Paper>
       </Link>

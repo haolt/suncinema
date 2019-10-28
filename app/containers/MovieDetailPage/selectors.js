@@ -21,9 +21,15 @@ const makeSelectorCurrentMovie = () =>
     selectMovieDetailPageDomain,
     substate => substate.currentMovie,
   );
+const makeSelectorHasRequestDone = () =>
+  createSelector(
+    selectMovieDetailPageDomain,
+    substate => substate.hasRequestDone,
+  );
 export default makeSelectMovieDetailPage;
 export {
   selectMovieDetailPageDomain,
   makeSelectorCurrentID,
   makeSelectorCurrentMovie,
+  makeSelectorHasRequestDone,
 };

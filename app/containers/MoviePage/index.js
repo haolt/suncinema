@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Footer from 'components/Footer';
 import MovieCategories from 'components/_moviePage/MovieCategories';
 import MovieList from 'components/_moviePage/MovieList';
@@ -17,6 +17,7 @@ import {
   makeSelectMovies,
   makeSelectPage,
   makeSelectPageTotal,
+  makeSelectHasRequestDone,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -42,15 +43,23 @@ export function MoviePage(props) {
         <meta name="description" content="Description of DiscoverPage" />
       </Helmet>
       <MovieCategories sendSortMovieRequest={props.sendSortMovieRequest} />
-      <MovieList movies={props.movies} />
-      <FlexWrapper>
-        <Pagination
-          curentPage={props.page}
-          pageTotal={props.pageTotal}
-          sendSortMovieRequest={props.sendSortMovieRequest}
-        />
-      </FlexWrapper>
-      <Footer />
+      {props.hasRequestDone ? (
+        <>
+          <MovieList movies={props.movies} />
+          <FlexWrapper>
+            <Pagination
+              curentPage={props.page}
+              pageTotal={props.pageTotal}
+              sendSortMovieRequest={props.sendSortMovieRequest}
+            />
+          </FlexWrapper>
+          <Footer />
+        </>
+      ) : (
+        <FlexWrapper>
+          <CircularProgress color="secondary" />
+        </FlexWrapper>
+      )}
     </>
   );
 }
@@ -59,12 +68,14 @@ MoviePage.propTypes = {
   sendSortMovieRequest: PropTypes.func.isRequired,
   movies: PropTypes.array.isRequired,
   pageTotal: PropTypes.number.isRequired,
+  hasRequestDone: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   movies: makeSelectMovies(),
   page: makeSelectPage(),
   pageTotal: makeSelectPageTotal(),
+  hasRequestDone: makeSelectHasRequestDone(),
 });
 
 function mapDispatchToProps(dispatch) {

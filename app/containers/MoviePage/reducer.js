@@ -11,6 +11,7 @@ export const initialState = {
   page: 1, // currentPage
   pageTotal: 1, // quantity of pages
   movies: [],
+  hasRequestDone: false,
 };
 
 const moviePageReducer = (state = initialState, action) => {
@@ -27,9 +28,13 @@ const moviePageReducer = (state = initialState, action) => {
         movies: action.response.data.data,
         page: action.response.data.page,
         pageTotal: Math.ceil(action.response.data.total / 10),
+        hasRequestDone: true,
       };
     case SORT_MOVIE_REQUEST_FAIL:
-      return state;
+      return {
+        ...state,
+        hasRequestDone: true,
+      };
     default:
       return state;
   }

@@ -32,6 +32,11 @@ const makeSelectPageTotal = () =>
     selectMoviePageDomain,
     substate => substate.pageTotal,
   );
+const makeSelectHasRequestDone = () =>
+  createSelector(
+    selectMoviePageDomain,
+    substate => substate.hasRequestDone,
+  );
 const makeSelectMovies = () =>
   createSelector(
     selectMoviePageDomain,
@@ -46,4 +51,5 @@ export {
   makeSelectPage,
   makeSelectPageTotal,
   makeSelectMovies,
+  makeSelectHasRequestDone,
 };

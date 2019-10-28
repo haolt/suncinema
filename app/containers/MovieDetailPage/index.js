@@ -17,7 +17,10 @@ import MovieDetail from 'components/MovieDetail';
 import reducer from './reducer';
 import saga from './saga';
 import { sendGetAMovieRequest } from './actions';
-import { makeSelectorCurrentMovie } from './selectors';
+import {
+  makeSelectorCurrentMovie,
+  makeSelectorHasRequestDone,
+} from './selectors';
 
 export function MovieDetailPage(props) {
   useInjectReducer({ key: 'movieDetailPage', reducer });
@@ -32,7 +35,10 @@ export function MovieDetailPage(props) {
         <title>MovieDetailPage</title>
         <meta name="description" content="Description of MovieDetailPage" />
       </Helmet>
-      <MovieDetail currentMovie={props.currentMovie} />
+      <MovieDetail
+        currentMovie={props.currentMovie}
+        hasRequestDone={props.hasRequestDone}
+      />
     </div>
   );
 }
@@ -41,10 +47,12 @@ MovieDetailPage.propTypes = {
   sendGetAMovieRequest: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   currentMovie: PropTypes.object.isRequired,
+  hasRequestDone: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   currentMovie: makeSelectorCurrentMovie(),
+  hasRequestDone: makeSelectorHasRequestDone(),
 });
 
 function mapDispatchToProps(dispatch) {

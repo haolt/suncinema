@@ -7,6 +7,7 @@ import {
 export const initialState = {
   curentID: 0,
   currentMovie: {},
+  hasRequestDone: false,
 };
 
 const movieDetailPageReducer = (state = initialState, action) => {
@@ -14,9 +15,16 @@ const movieDetailPageReducer = (state = initialState, action) => {
     case GET_A_MOVIE_REQUEST:
       return { ...state, currentID: action.payloads };
     case GET_A_MOVIE_REQUEST_SUCCESS:
-      return { ...state, currentMovie: action.response.data };
+      return {
+        ...state,
+        currentMovie: action.response.data,
+        hasRequestDone: true,
+      };
     case GET_A_MOVIE_REQUEST_FAIL:
-      return { ...state };
+      return {
+        ...state,
+        hasRequestDone: true,
+      };
     default:
       return state;
   }
