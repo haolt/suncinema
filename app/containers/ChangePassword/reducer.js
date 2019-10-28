@@ -1,20 +1,32 @@
-/*
- *
- * ChangePassword reducer
- *
- */
-import produce from 'immer';
-import { DEFAULT_ACTION } from './constants';
+import {
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_REQUEST_SUCCESS,
+  CHANGE_PASSWORD_REQUEST_FAIL,
+} from './constants';
 
-export const initialState = {};
+export const initialState = {
+  hasChangeSuccess: false,
+};
 
-/* eslint-disable default-case, no-param-reassign */
-const changePasswordReducer = (state = initialState, action) =>
-  produce(state, (/* draft */) => {
-    switch (action.type) {
-      case DEFAULT_ACTION:
-        break;
-    }
-  });
-
+const changePasswordReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case CHANGE_PASSWORD_REQUEST:
+      return {
+        ...state,
+        updatedUser: action.payloads,
+      };
+    case CHANGE_PASSWORD_REQUEST_SUCCESS:
+      return {
+        ...state,
+        hasChangeSuccess: true,
+      };
+    case CHANGE_PASSWORD_REQUEST_FAIL:
+      return {
+        ...state,
+        hasChangeSuccess: false,
+      };
+    default:
+      return state;
+  }
+};
 export default changePasswordReducer;

@@ -1,18 +1,17 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import Typography from '@material-ui/core/Typography';
 
 const showCountResult = count => {
   switch (count) {
     case 0:
-      return <span>No result.</span>;
+      return <Typography variant="subtitle2" gutterBottom>No result</Typography>
     case 1:
-      return <span>1 result.</span>;
+      return <Typography variant="subtitle2" gutterBottom>1 result</Typography>
     case -1:
       return '';
     default:
-      return <span>{count} results.</span>;
+      return <Typography variant="subtitle2" gutterBottom>{count} results.</Typography>;
   }
 };
 

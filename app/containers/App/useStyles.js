@@ -5,22 +5,6 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    boxShadow: 'none',
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
   menuButton: {
     maxWidth: '2em',
     margin: 0,
@@ -42,8 +26,7 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    // background: '#212121',
-    background: '#22293C',
+    background: '#22273B',
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
@@ -55,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing(9) + 1,
     },
-    background: '#22293C',
+    background: '#22273B',
   },
   toolbar: {
     display: 'flex',
@@ -117,7 +100,7 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     padding: '0.8em',
-  }
+  },
 }));
 
 export default useStyles;

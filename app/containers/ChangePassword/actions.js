@@ -1,13 +1,20 @@
-/*
- *
- * ChangePassword actions
- *
- */
+import {
+  CHANGE_PASSWORD_REQUEST,
+  CHANGE_PASSWORD_REQUEST_SUCCESS,
+  CHANGE_PASSWORD_REQUEST_FAIL,
+} from './constants';
 
-import { DEFAULT_ACTION } from './constants';
+export const sendChangePasswordRequest = user => ({
+  type: CHANGE_PASSWORD_REQUEST,
+  payloads: user,
+});
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const sendChangePasswordRequestSuccess = response => ({
+  type: CHANGE_PASSWORD_REQUEST_SUCCESS,
+  response,
+});
+
+export const sendChangePasswordRequestFail = response => ({
+  type: CHANGE_PASSWORD_REQUEST_FAIL,
+  response,
+});

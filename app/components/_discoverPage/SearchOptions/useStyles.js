@@ -9,27 +9,22 @@ const useStyles = makeStyles(theme => ({
     boxShadow: 'none',
     padding: theme.spacing(2, 0),
   },
-  textField: {
-    color: '#ffffff',
-  },
-  heading: {
-    textAlign: 'right',
-    display: 'inline-block',
-  },
-  advanceOptions: {
-    backgroundColor: 'transparent',
-    boxShadow: 'none',
-  },
-  advanceItem: {
-    boxShadow: 'none',
-    padding: 0,
-  },
-  formControl: {
-    margin: theme.spacing(0),
-    minWidth: 120,
-  },
-  label: {
-    margin: 0,
+  keywordsInput: {
+    color: '#333',
+    fontWeight: '600',
+    fontSize: '1.3em',
+    border: 'none',
+    width: '20%',
+    height: '2.7em',
+    transition: '0.2s',
+    padding: '5px 10px',
+    borderRadius: '2em',
+    outline: 'none',
+    '&:focus': {
+      width: '25%',
+      transition: '0.2s',
+      outline: 'none',
+    },
   },
 }));
 export default useStyles;

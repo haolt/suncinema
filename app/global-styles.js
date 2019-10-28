@@ -16,6 +16,9 @@ const GlobalStyle = createGlobalStyle`
   .MuiExpansionPanel-root:before {
     display: none;
   }
+  a:hover span, a:focus span, a:active span, a.selected span {
+    color: #ff7675;
+  }
 `;
 
 export default GlobalStyle;

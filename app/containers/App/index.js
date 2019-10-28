@@ -3,12 +3,12 @@ import { Switch, Route, Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Divider from '@material-ui/core/Divider';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import logo from 'images/logos/logo_2.png';
 import logoMini from 'images/logos/logo_0.png';
@@ -33,7 +33,6 @@ export default function App() {
   const handleDrawerOpen = () => {
     setOpen(true);
   };
-
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -42,13 +41,6 @@ export default function App() {
     <div className={classes.root}>
       <CssBaseline />
       <GlobalStyle />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-      </AppBar>
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -64,20 +56,26 @@ export default function App() {
         open={open}
       >
         <div className={classes.toolbar}>
-          <Link
-            to="/"
-            className={clsx(classes.logo, { [classes.hide]: !open })}
-          >
-            <img src={logo} alt="logo" />
-          </Link>
+          <Tooltip title="Suncinema">
+            <Link
+              to="/"
+              className={clsx(classes.logo, { [classes.hide]: !open })}
+            >
+              <img src={logo} alt="logo" />
+            </Link>
+          </Tooltip>
           <IconButton
             onClick={handleDrawerClose}
             className={clsx({ [classes.hide]: !open })}
           >
             {theme.direction === 'rtl' ? (
-              <ChevronRightIcon />
+              <Tooltip title="Open">
+                <ChevronRightIcon />
+              </Tooltip>
             ) : (
-              <ChevronLeftIcon />
+              <Tooltip title="Close">
+                <ChevronLeftIcon />
+              </Tooltip>
             )}
           </IconButton>
           <IconButton
@@ -86,14 +84,15 @@ export default function App() {
               [classes.hide]: open,
             })}
           >
-            <img src={logoMini} alt="logo" />
+            <Tooltip title="Suncinema">
+              <img src={logoMini} alt="logo" />
+            </Tooltip>
           </IconButton>
         </div>
         <Divider className={classes.divider} />
         <Navigate />
       </Drawer>
       <main className={classes.content}>
-        {/* <div className={classes.toolbar} /> */}
         <Switch>
           <Route exact path="/" component={DiscoverPage} />
           <Route exact path="/discover" component={DiscoverPage} />

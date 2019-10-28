@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
@@ -17,10 +16,11 @@ function SearchOptions(props) {
   };
   return (
     <Paper className={classes.root}>
-      <TextField
+      <input
+        type="text"
         id="keywords"
         name="keywords"
-        className={classes.textField}
+        className={classes.keywordsInput}
         placeholder="Search hot movies"
         onChange={handleChange('keywords')}
       />

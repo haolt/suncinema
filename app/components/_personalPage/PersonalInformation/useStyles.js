@@ -37,5 +37,8 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     textAlign: 'right',
   },
+  dialogTitle: {
+    textAlign: 'center',
+  },
 }));
 export default useStyles;
