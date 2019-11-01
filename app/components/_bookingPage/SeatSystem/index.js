@@ -14,7 +14,6 @@ import useStyles from './useStyles';
 import Seat from './Seat';
 import { seatStatus, seatNameRow, seatNameColumn } from './constants';
 
-
 const switchItemToArray = (item, arr) => {
   if (arr.includes(item)) {
     return arr.filter(val => val !== item);
@@ -95,7 +94,6 @@ function SeatSystem(props) {
 
 SeatSystem.propTypes = {
   bookableSeats: PropTypes.array.isRequired,
-  updateAt: PropTypes.string.isRequired,
 };
 
 export default SeatSystem;

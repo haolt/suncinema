@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import clsx from 'clsx';
@@ -36,7 +37,6 @@ export default function App() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
   return (
     <div className={classes.root}>
       <CssBaseline />

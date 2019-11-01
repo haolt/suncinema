@@ -14,15 +14,26 @@ import InsertInvitationIcon from '@material-ui/icons/InsertInvitation';
 import VpnKeyTwoToneIcon from '@material-ui/icons/VpnKeyTwoTone';
 import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 import PersonPinTwoToneIcon from '@material-ui/icons/PersonPinTwoTone';
-import LogoutBtn from 'components/LogoutBtn';
+// import LogoutBtn from 'components/LogoutBtn';
+import Logout from 'containers/Logout';
+import { getCookie } from 'services/cookie';
+import { ACCESS_TOKEN } from 'commons/constants';
+
 import styles from './styles';
 
 const Navigate = props => {
-  const { classes } = props;
+  const { classes, isLoginSuccess } = props;
+
+  console.log('NAV: ', isLoginSuccess);
   return (
     <>
       <List>
-        <NavLink className={classes.item} to="/discover" activeClassName="selected" key="discover">
+        <NavLink
+          className={classes.item}
+          to="/discover"
+          activeClassName="selected"
+          key="discover"
+        >
           <Tooltip title="Discover">
             <ListItem button>
               <ListItemIcon>
@@ -32,7 +43,12 @@ const Navigate = props => {
             </ListItem>
           </Tooltip>
         </NavLink>
-        <NavLink className={classes.item} to="/movies" activeClassName="selected" key="movies">
+        <NavLink
+          className={classes.item}
+          to="/movies"
+          activeClassName="selected"
+          key="movies"
+        >
           <Tooltip title="Movies">
             <ListItem button>
               <ListItemIcon>
@@ -42,7 +58,12 @@ const Navigate = props => {
             </ListItem>
           </Tooltip>
         </NavLink>
-        <NavLink className={classes.item} to="/booking" activeClassName="selected" key="booking">
+        <NavLink
+          className={classes.item}
+          to="/booking"
+          activeClassName="selected"
+          key="booking"
+        >
           <Tooltip title="Booking">
             <ListItem button>
               <ListItemIcon>
@@ -55,17 +76,29 @@ const Navigate = props => {
       </List>
       <Divider />
       <List>
-        <NavLink className={classes.item} to="/login" activeClassName="selected" key="Login">
-          <Tooltip title="Login">
-            <ListItem button>
-              <ListItemIcon>
-                <VpnKeyTwoToneIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText className={classes.title} primary="Login" />
-            </ListItem>
-          </Tooltip>
-        </NavLink>
-        <NavLink className={classes.item} to="/register" activeClassName="selected" key="Register">
+        {isLoginSuccess || (
+          <NavLink
+            className={classes.item}
+            to="/login"
+            activeClassName="selected"
+            key="Login"
+          >
+            <Tooltip title="Login">
+              <ListItem button>
+                <ListItemIcon>
+                  <VpnKeyTwoToneIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText className={classes.title} primary="Login" />
+              </ListItem>
+            </Tooltip>
+          </NavLink>
+        )}
+        <NavLink
+          className={classes.item}
+          to="/register"
+          activeClassName="selected"
+          key="Register"
+        >
           <Tooltip title="Register">
             <ListItem button>
               <ListItemIcon>
@@ -77,19 +110,27 @@ const Navigate = props => {
         </NavLink>
       </List>
       <Divider />
-      <List>
-        <NavLink className={classes.item} to="/me" activeClassName="selected" key="me">
-          <Tooltip title="Me">
-            <ListItem button>
-              <ListItemIcon>
-                <PersonPinTwoToneIcon className={classes.icon} />
-              </ListItemIcon>
-              <ListItemText className={classes.title} primary="Me" />
-            </ListItem>
-          </Tooltip>
-        </NavLink>
-        <LogoutBtn />
-      </List>
+      {(isLoginSuccess || getCookie(ACCESS_TOKEN)) && (
+        <List>
+          <NavLink
+            className={classes.item}
+            to="/me"
+            activeClassName="selected"
+            key="me"
+          >
+            <Tooltip title="Profile">
+              <ListItem button>
+                <ListItemIcon>
+                  <PersonPinTwoToneIcon className={classes.icon} />
+                </ListItemIcon>
+                <ListItemText className={classes.title} primary="Profile" />
+              </ListItem>
+            </Tooltip>
+          </NavLink>
+          {/* <LogoutBtn /> */}
+          <Logout />
+        </List>
+      )}
     </>
   );
 };
@@ -97,4 +138,5 @@ export default withStyles(styles)(Navigate);
 
 Navigate.propTypes = {
   classes: PropTypes.object,
+  isLoginSuccess: PropTypes.bool,
 };

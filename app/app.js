@@ -8,7 +8,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 
-import App from 'containers/App';
+// import App from 'containers/App';
+import AppContainer from 'containers/AppContainer';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import LanguageProvider from 'containers/LanguageProvider';
@@ -33,7 +34,8 @@ const render = messages => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ThemeProvider theme={theme}>
-            <App />
+            {/* <App /> */}
+            <AppContainer />
           </ThemeProvider>
         </ConnectedRouter>
       </LanguageProvider>
