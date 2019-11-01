@@ -1,10 +1,10 @@
+/* eslint-disable prettier/prettier */
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import Grid from '@material-ui/core/Grid';
 import PersonalInformation from 'components/_personalPage/PersonalInformation';
 import FlexWrapperLP from 'components/_layouts/FlexWrapperLP';
 import MessageBox from 'components/MessageBox';
@@ -27,11 +27,13 @@ export function PersonalPage(props) {
   useInjectSaga({ key: 'personalPage', saga });
 
   useEffect(() => {
-    if ((props.isLoginSuccess && getCookie(ACCESS_TOKEN)) || getCookie(ACCESS_TOKEN)) {
+    if (
+      (props.isLoginSuccess && getCookie(ACCESS_TOKEN)) ||
+      getCookie(ACCESS_TOKEN)
+    ) {
       props.sendGetUserInfoRequest();
     }
   }, []);
-
   return (
     <div>
       <Helmet>

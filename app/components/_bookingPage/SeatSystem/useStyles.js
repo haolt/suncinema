@@ -23,6 +23,12 @@ const useStyles = makeStyles(theme => ({
     color: '#fff',
     background: '#334458',
   },
+  paperCustom: {
+    padding: theme.spacing(2),
+    color: '#fff',
+    background: '#334458',
+    marginTop: '2em',
+  },
   statusList: {
     margin: '1em 0',
     display: 'flex',

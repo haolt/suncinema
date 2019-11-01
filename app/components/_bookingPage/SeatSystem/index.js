@@ -14,8 +14,13 @@ import useStyles from './useStyles';
 import Seat from './Seat';
 import { seatStatus, seatNameRow, seatNameColumn } from './constants';
 
-const bookingSeat = (x, y) => {
-  alert(`x = ${x}, y = ${y}`)
+
+const switchItemToArray = (item, arr) => {
+  if (arr.includes(item)) {
+    return arr.filter(val => val !== item);
+  }
+  arr.push(item);
+  return arr;
 }
 
 function SeatSystem(props) {
@@ -23,6 +28,16 @@ function SeatSystem(props) {
   const { bookableSeats } = props;
   const row = bookableSeats.length;
   const column = bookableSeats[0].length;
+  const [values, setValues] = React.useState({
+    seats: [],
+  });
+
+  const onChangeBookingSeat = location => {
+    setValues({
+      seats: switchItemToArray(location, values.seats),
+    });
+  };
+
   return (
     <Grid container spacing={5} className={classes.seatNet}>
       <Grid item xs={1} sm={1}>
@@ -42,9 +57,11 @@ function SeatSystem(props) {
                         type="button"
                         title={`${seatNameRow[index]}${seatNameColumn[_index]}`}
                         disabled={seat !== 'null'}
-                        onClick={() => bookingSeat(index, _index)}
+                        onClick={() => onChangeBookingSeat(`${seatNameRow[index]}${seatNameColumn[_index]}`)}
                       >
-                        {`${seatNameRow[index]}${seatNameColumn[_index]}`}
+                        {/* {`${seatNameRow[index]}${seatNameColumn[_index]}`} */}
+                        {/* {seat} */}
+                        {`${index}:${_index}`}
                       </Seat>))
                   }
                 </div>
@@ -64,7 +81,13 @@ function SeatSystem(props) {
               <span className={classes.statusTitle}>{seat.title }</span>
             </div>)}
         </Paper>
-        <p>(*)Update at {props.updateAt}.</p>
+        <Paper className={classes.paperCustom}>
+          <Typography variant="h5" gutterBottom>
+              Selected Seats
+          </Typography>
+          {/* {values.seats.map((val, index) => <span key={index}>{ val || ''}</span>)} */}
+          <span>{values.seats.join(', ')}</span>
+        </Paper>
       </Grid>
     </Grid>
   );

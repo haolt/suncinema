@@ -14,7 +14,7 @@ function MessageBox() {
       </Typography>
       <div className={classes.btns}>
         <Link to="/movies" className={classes.btn}>
-          <Button variant="contained" color="action">
+          <Button variant="contained" color="primary">
             Back to Movies
           </Button>
         </Link>

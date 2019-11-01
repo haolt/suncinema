@@ -1,20 +1,17 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
 /* eslint-disable camelcase */
 /* eslint-disable react/jsx-boolean-value */
-/* eslint-disable no-console */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import FolderIcon from '@material-ui/icons/Folder';
 import IconButton from '@material-ui/core/IconButton';
-import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -30,17 +27,14 @@ import WhatshotIcon from '@material-ui/icons/Whatshot';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import SimCardIcon from '@material-ui/icons/SimCard';
 import RoomIcon from '@material-ui/icons/Room';
-import EditIcon from '@material-ui/icons/Edit';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 import UpdateUser from 'containers/UpdateUser';
 import ChangePassword from 'containers/ChangePassword';
-import UploadFile from 'components/_personalPage/UploadFile';
+import UploadFileContainer from 'components/_personalPage/UploadFileContainer';
 
 import useStyles from './useStyles';
-const defaultAvatar =
-  'https://3.bp.blogspot.com/-AEkny-9Y0Uw/W8YBZnD7oJI/AAAAAAAybmk/35h9UBHIQxk8OE_b8uqtw8gmYJ5XbOKpgCLcBGAs/s1600/AW2040870_20.gif';
 
 function PersonalInformation(props) {
   // Popover
@@ -122,16 +116,7 @@ function PersonalInformation(props) {
             <Divider />
             <Grid container spacing={1} className={classes.contentGrid}>
               <Grid item md={3} xs={12}>
-                <div className={classes.avatarWrapper}>
-                  <IconButton className={classes.avatarBtn} onClick={() => handleClickOpenDialoge('upload_file')}>
-                    <EditIcon />
-                  </IconButton>
-                  <Avatar
-                    alt="avatar"
-                    src={avatar || defaultAvatar}
-                    className={classes.avatar}
-                  />
-                </div>
+                <UploadFileContainer />
               </Grid>
               <Grid item md={5} xs={12}>
                 <List dense={true}>
@@ -217,9 +202,7 @@ function PersonalInformation(props) {
                 <ListItemIcon>
                   <AccessTimeIcon className={classes.icon} />
                 </ListItemIcon>
-                <ListItemText
-                  primary={`${name} changed Info. (15mins ago)`}
-                />
+                <ListItemText primary={`${name} changed Info. (15mins ago)`} />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
@@ -233,17 +216,13 @@ function PersonalInformation(props) {
                 <ListItemIcon>
                   <AccessTimeIcon className={classes.icon} />
                 </ListItemIcon>
-                <ListItemText
-                  primary={`${name} loged in. (1 day ago)`}
-                />
+                <ListItemText primary={`${name} loged in. (1 day ago)`} />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
                   <AccessTimeIcon className={classes.icon} />
                 </ListItemIcon>
-                <ListItemText
-                  primary={`${name} registered. (1 week ago)`}
-                />
+                <ListItemText primary={`${name} registered. (1 week ago)`} />
               </ListItem>
             </List>
           </CardContent>
@@ -258,7 +237,7 @@ function PersonalInformation(props) {
         <DialogTitle className={classes.dialogTitle}>
           {contentDialogeType === 'update_user'
             ? 'Update Information'
-            : (contentDialogeType === 'upload_file' ? 'Update Avatar' : 'Change Password' )}
+            : 'Change Password'}
         </DialogTitle>
         {contentDialogeType === 'update_user' ? (
           <UpdateUser
@@ -266,11 +245,7 @@ function PersonalInformation(props) {
             handleCloseDialoge={handleCloseDialoge}
           />
         ) : (
-          contentDialogeType === 'upload_file' ? (
-            <UploadFile />
-          ): (
-            <ChangePassword />
-          )
+          <ChangePassword />
         )}
       </Dialog>
     </Grid>
